@@ -841,6 +841,7 @@
                         const form = document.createElement('form');
                         form.method = 'POST';
                         form.action = 'https://secure.wayforpay.com/pay';
+                        form.target = '_top';
                         form.style.display = 'none';
                         
                         const pd = data.paymentData;
