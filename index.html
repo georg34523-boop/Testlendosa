@@ -825,9 +825,16 @@
                 }
                 
                 // Відправляємо в скрипт і отримуємо дані для оплати
+                console.log('Відправляю запит на:', GOOGLE_SCRIPT_URL);
+                
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData })
-                .then(response => response.json())
+                .then(response => {
+                    console.log('Отримано відповідь:', response);
+                    console.log('Status:', response.status);
+                    return response.json();
+                })
                 .then(data => {
+                    console.log('Дані від скрипта:', data);
                     if (data.paymentData) {
                         // Створюємо приховану форму для POST на WayForPay
                         const form = document.createElement('form');
@@ -848,6 +855,7 @@
                             'productPrice[]': pd.productPrice,
                             'merchantSignature': pd.merchantSignature,
                             'returnUrl': pd.returnUrl,
+                            'returnMethod': 'GET',
                             'serviceUrl': pd.serviceUrl,
                             'clientFirstName': pd.clientFirstName,
                             'clientPhone': pd.clientPhone
@@ -870,8 +878,10 @@
                     }
                 })
                 .catch(error => {
-                    console.error('Error:', error);
-                    alert('Помилка з\'єднання: ' + error);
+                    console.error('ПОМИЛКА fetch:', error);
+                    console.error('Тип помилки:', error.name);
+                    console.error('Повідомлення:', error.message);
+                    alert('Помилка з\'єднання: ' + error.message);
                     btn.disabled = false;
                     btn.innerHTML = 'Перейти до оплати';
                 });
