@@ -836,6 +836,7 @@
                 .then(data => {
                     console.log('Дані від скрипта:', data);
                     if (data.paymentData) {
+                        console.log('paymentData знайдено, створюю форму...');
                         // Створюємо приховану форму для POST на WayForPay
                         const form = document.createElement('form');
                         form.method = 'POST';
@@ -843,6 +844,7 @@
                         form.style.display = 'none';
                         
                         const pd = data.paymentData;
+                        console.log('pd:', pd);
                         const fields = {
                             'merchantAccount': pd.merchantAccount,
                             'merchantDomainName': pd.merchantDomainName,
@@ -861,6 +863,8 @@
                             'clientPhone': pd.clientPhone
                         };
                         
+                        console.log('fields:', fields);
+                        
                         for (const [key, value] of Object.entries(fields)) {
                             const input = document.createElement('input');
                             input.type = 'hidden';
@@ -869,8 +873,10 @@
                             form.appendChild(input);
                         }
                         
+                        console.log('Форма створена, відправляю...');
                         document.body.appendChild(form);
                         form.submit();
+                        console.log('Форма відправлена');
                     } else {
                         alert('Помилка створення платежу: ' + JSON.stringify(data));
                         btn.disabled = false;
