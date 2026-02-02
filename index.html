@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Фокус кохання | Онлайн-курс</title>
-    <!-- Подключение Tailwind CSS -->
+    <title>Фокус кохання | Premium Course</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Подключение шрифта Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Иконки -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -17,10 +14,12 @@
                 extend: {
                     colors: {
                         brand: {
-                            bg: '#FAFAFA', // Светло-бежевый/белый
-                            accent: '#E60073', // Ярко-розовый
-                            text: '#333333', // Темно-серый текст
-                            lightpink: '#FFF5F7'
+                            bg: '#FAFAFA',
+                            accent: '#E60073', 
+                            accentDark: '#C20061',
+                            text: '#333333',
+                            lightpink: '#FFF0F5',
+                            gold: '#FFD700'
                         }
                     },
                     fontFamily: {
@@ -29,7 +28,8 @@
                     animation: {
                         'marquee': 'marquee 40s linear infinite',
                         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'blob': 'blob 7s infinite',
                     },
                     keyframes: {
                         marquee: {
@@ -39,6 +39,12 @@
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         }
                     }
                 }
@@ -47,442 +53,466 @@
     </script>
     
     <style>
-        /* Скрытие скроллбара для красоты карусели, если нужно */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        .gradient-text {
+            background: linear-gradient(45deg, #E60073, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .gradient-bg {
+            background: linear-gradient(135deg, #E60073 0%, #FF4D94 100%);
         }
-        
-        /* Плавное открытие аккордеона */
-        details > summary {
-            list-style: none;
+        .premium-shadow {
+            box-shadow: 0 10px 30px -10px rgba(230, 0, 115, 0.3);
         }
-        details > summary::-webkit-details-marker {
-            display: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
-        details[open] summary ~ * {
-            animation: sweep .3s ease-in-out;
-        }
-        @keyframes sweep {
-            0%    {opacity: 0; transform: translateY(-10px)}
-            100%  {opacity: 1; transform: translateY(0)}
-        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary ~ * { animation: sweep .3s ease-in-out; }
+        @keyframes sweep { 0% {opacity: 0; transform: translateY(-10px)} 100% {opacity: 1; transform: translateY(0)} }
     </style>
 </head>
-<body class="bg-brand-bg text-brand-text antialiased overflow-x-hidden relative">
+<body class="bg-brand-bg text-brand-text antialiased pb-24 md:pb-0 font-sans selection:bg-brand-accent selection:text-white">
 
-    <!-- Sticky Header -->
-    <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold text-brand-accent tracking-wide uppercase">
+    <!-- Sticky Header (Desktop) -->
+    <header class="hidden md:block fixed top-0 w-full z-40 glass shadow-sm transition-all duration-300 border-b border-white/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-extrabold tracking-tighter uppercase gradient-text">
                 Фокус Кохання
             </div>
-            <a href="#join" class="hidden md:inline-block bg-brand-accent text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-brand-accent/50 hover:scale-105 transition-all duration-300">
-                Приєднатися
-            </a>
+            <nav class="flex gap-6 text-sm font-semibold text-gray-600">
+                <a href="#about" class="hover:text-brand-accent transition">Про курс</a>
+                <a href="#program" class="hover:text-brand-accent transition">Програма</a>
+                <a href="#reviews" class="hover:text-brand-accent transition">Відгуки</a>
+            </nav>
+            <!-- Timer in Header -->
+            <div class="flex items-center gap-4">
+                <div class="text-right leading-tight">
+                    <div class="text-xs text-gray-400 line-through">2350 грн</div>
+                    <div class="text-xl font-bold text-brand-accent">450 грн</div>
+                </div>
+                <a href="#join" class="gradient-bg text-white px-6 py-2.5 rounded-full font-bold shadow-lg hover:shadow-brand-accent/50 hover:scale-105 transition-all duration-300">
+                    Приєднатися
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Floating Mobile Button (always visible) -->
-    <a href="#join" class="fixed bottom-6 right-6 z-50 md:hidden bg-brand-accent text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 animate-pulse-slow">
-        <i class="fa-solid fa-heart text-xl"></i>
-    </a>
-
     <!-- Блок 1: Hero -->
-    <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
-        <!-- Фон -->
+    <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-10 md:pt-20">
         <div class="absolute inset-0 z-0">
-            <!-- Умная вставка картинки: fonna1slaid.jpg -->
             <img src="fonna1slaid.jpg" alt="Background" class="w-full h-full object-cover object-center" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'">
-            <!-- Градиент для читаемости текста -->
-            <div class="absolute inset-0 bg-white/40 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-white/30 bg-gradient-to-t from-white via-white/40 to-white/10 backdrop-blur-[2px]"></div>
         </div>
 
-        <div class="container mx-auto px-4 z-10 text-center max-w-3xl animate-fade-in-up">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Віднайди <span class="text-brand-accent">внутрішню опору</span>
+        <div class="container mx-auto px-4 z-10 text-center max-w-4xl animate-fade-in-up relative">
+            <div class="inline-block bg-white/80 backdrop-blur-sm px-4 py-1 rounded-full text-brand-accent font-bold text-sm tracking-widest uppercase mb-4 shadow-sm border border-brand-accent/20">
+                🔥 Спеціальна пропозиція
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-[1.1] tracking-tight">
+                Віднайди свою <br>
+                <span class="gradient-text">внутрішню опору</span>
             </h1>
-            <p class="text-lg md:text-xl text-gray-700 mb-10 font-medium">
-                7-денний онлайн-курс для жінок. Віднови зв’язок із собою, відчуй силу, навчись будувати здорові стосунки.
+            <p class="text-lg md:text-2xl text-gray-700 mb-8 font-medium max-w-2xl mx-auto leading-relaxed">
+                7-денний онлайн-курс для жінок. Віднови зв’язок із собою, відчуй силу та навчись будувати здорові стосунки.
             </p>
-            <a href="#join" class="inline-block bg-brand-accent text-white text-lg font-bold px-10 py-4 rounded-full shadow-xl hover:shadow-2xl hover:shadow-brand-accent/40 transform hover:-translate-y-1 transition-all duration-300">
-                ПРИЄДНАТИСЯ ЗАРАЗ
+            
+            <!-- Hero Pricing Badge -->
+            <div class="flex flex-col items-center justify-center gap-2 mb-8">
+                <div class="bg-white p-4 rounded-2xl shadow-xl border border-pink-100 flex items-center gap-4 transform hover:scale-105 transition-transform duration-300">
+                    <div class="flex flex-col items-start">
+                        <span class="text-gray-400 text-sm line-through font-medium">Звичайна ціна: 2350 грн</span>
+                        <span class="text-3xl font-bold text-brand-accent">450 грн</span>
+                    </div>
+                    <div class="h-10 w-[1px] bg-gray-200"></div>
+                    <div class="text-left">
+                        <div class="text-xs font-bold text-red-500 uppercase animate-pulse-fast">До кінця акції:</div>
+                        <div class="text-xl font-mono font-bold text-gray-800" id="hero-timer">10:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#join" class="inline-block gradient-bg text-white text-xl font-bold px-12 py-5 rounded-full premium-shadow hover:scale-105 transition-all duration-300">
+                ОТРИМАТИ ДОСТУП
             </a>
         </div>
     </section>
 
-    <!-- Блок 2: Для кого курс -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
-                Цей курс для тебе, <span class="text-brand-accent">якщо…</span>
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
-                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
-                        <i class="fa-solid fa-heart-crack text-brand-accent text-xl group-hover:text-white"></i>
-                    </div>
-                    <p class="text-lg font-medium">Пережила розлучення, втрату або зраду.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
-                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
-                        <i class="fa-solid fa-feather text-brand-accent text-xl group-hover:text-white"></i>
-                    </div>
-                    <p class="text-lg font-medium">Не знаєш, як відпустити минуле.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
-                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
-                        <i class="fa-solid fa-person-dress text-brand-accent text-xl group-hover:text-white"></i>
-                    </div>
-                    <p class="text-lg font-medium">Хочеш відчути жіночність і енергію.</p>
-                </div>
-                <!-- Card 4 -->
-                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
-                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
-                        <i class="fa-solid fa-user-lock text-brand-accent text-xl group-hover:text-white"></i>
-                    </div>
-                    <p class="text-lg font-medium">Боїшся залишитись сама.</p>
-                </div>
-                <!-- Card 5 -->
-                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 md:col-span-2 lg:col-span-1 group">
-                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
-                        <i class="fa-solid fa-hands-holding-circle text-brand-accent text-xl group-hover:text-white"></i>
-                    </div>
-                    <p class="text-lg font-medium">Хочеш навчитись будувати гідні стосунки.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Блок 2: Для кого курс (Premium Icons) -->
+    <section id="about" class="py-24 bg-white relative">
+        <!-- Декор фона -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-brand-lightpink rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
 
-    <!-- Блок 3: Что получишь -->
-    <section class="py-20 bg-brand-bg">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
-                Що ти <span class="text-brand-accent">отримаєш?</span>
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16">
+                Цей курс для тебе, <span class="gradient-text">якщо…</span>
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Item 1 -->
-                <div class="flex items-start space-x-4">
-                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
-                    <p class="text-lg">Впевненість і внутрішню опору</p>
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-brand-accent/30 hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-50 to-white shadow-inner flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-heart-crack text-3xl text-brand-accent drop-shadow-md"></i>
+                    </div>
+                    <p class="text-xl font-semibold text-gray-800">Пережила розлучення, втрату або зраду.</p>
                 </div>
-                <!-- Item 2 -->
-                <div class="flex items-start space-x-4">
-                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
-                    <p class="text-lg">Розуміння своїх сценаріїв у стосунках</p>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-brand-accent/30 hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-50 to-white shadow-inner flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-feather text-3xl text-brand-accent drop-shadow-md"></i>
+                    </div>
+                    <p class="text-xl font-semibold text-gray-800">Не знаєш, як відпустити минуле.</p>
                 </div>
-                <!-- Item 3 -->
-                <div class="flex items-start space-x-4">
-                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
-                    <p class="text-lg">Вміння ставити межі без конфліктів</p>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-brand-accent/30 hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-50 to-white shadow-inner flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-person-dress text-3xl text-brand-accent drop-shadow-md"></i>
+                    </div>
+                    <p class="text-xl font-semibold text-gray-800">Хочеш відчути жіночність і енергію.</p>
                 </div>
-                <!-- Item 4 -->
-                <div class="flex items-start space-x-4">
-                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
-                    <p class="text-lg">Краще розуміння чоловіків і себе</p>
+                <!-- Card 4 -->
+                <div class="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-brand-accent/30 hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-50 to-white shadow-inner flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-user-lock text-3xl text-brand-accent drop-shadow-md"></i>
+                    </div>
+                    <p class="text-xl font-semibold text-gray-800">Боїшся залишитись сама.</p>
                 </div>
-                <!-- Item 5 -->
-                <div class="flex items-start space-x-4">
-                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
-                    <p class="text-lg">Контакт з тілом і емоціями</p>
-                </div>
-                <!-- Item 6 -->
-                <div class="flex items-start space-x-4">
-                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
-                    <p class="text-lg">Навички будувати зв’язок із любов’ю</p>
+                <!-- Card 5 -->
+                <div class="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-brand-accent/30 hover:shadow-2xl transition-all duration-300 md:col-span-2 lg:col-span-1 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-50 to-white shadow-inner flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-gem text-3xl text-brand-accent drop-shadow-md"></i>
+                    </div>
+                    <p class="text-xl font-semibold text-gray-800">Хочеш навчитись будувати гідні стосунки.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Блок 4: Программа (Аккордеон) -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Програма курсу</h2>
-            
-            <div class="space-y-4">
-                <!-- Lesson 1 -->
-                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
-                    <summary class="flex justify-between items-center font-semibold text-xl">
-                        <span>1. Роль масок</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
-                        Розбираємо, які ролі ми граємо та як вони заважають бути собою.
-                    </div>
-                </details>
-
-                <!-- Lesson 2 -->
-                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
-                    <summary class="flex justify-between items-center font-semibold text-xl">
-                        <span>2. Внутрішня опора</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
-                        Техніки відновлення власного стрижня та впевненості.
-                    </div>
-                </details>
-
-                <!-- Lesson 3 -->
-                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
-                    <summary class="flex justify-between items-center font-semibold text-xl">
-                        <span>3. Егоїзм vs любов до себе</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
-                        Вчимося відрізняти здорове піклування про себе від егоїзму.
-                    </div>
-                </details>
-
-                <!-- Lesson 4 -->
-                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
-                    <summary class="flex justify-between items-center font-semibold text-xl">
-                        <span>4. Про вібрації</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
-                        Як твій стан впливає на події навколо.
-                    </div>
-                </details>
-
-                <!-- Lesson 5 -->
-                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
-                    <summary class="flex justify-between items-center font-semibold text-xl">
-                        <span>5. Потреби чоловіка і жінки</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
-                        Психологія стосунків і базові потреби партнерів.
-                    </div>
-                </details>
-
-                <!-- Lesson 6 -->
-                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
-                    <summary class="flex justify-between items-center font-semibold text-xl">
-                        <span>6. Конфліктологія</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
-                        Мистецтво екологічного вирішення спорів.
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- Блок 5: Как проходит курс -->
-    <section class="py-20 bg-brand-lightpink">
+    <!-- Блок 3: Результаты -->
+    <section class="py-24 bg-brand-lightpink/50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Як це працює?</h2>
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16">
+                Що ти <span class="gradient-text">отримаєш?</span>
+            </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Step 1 -->
-                <div class="bg-white p-6 rounded-xl text-center shadow-sm h-full">
-                    <div class="text-4xl mb-4">💳</div>
-                    <h3 class="font-bold mb-2">Оплата</h3>
-                    <p class="text-sm text-gray-600">Доступ до платформи після оплати</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="flex items-center space-x-4 bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <p class="font-medium text-lg">Впевненість і внутрішню опору</p>
                 </div>
-                 <!-- Step 2 -->
-                 <div class="bg-white p-6 rounded-xl text-center shadow-sm h-full">
-                    <div class="text-4xl mb-4">📅</div>
-                    <h3 class="font-bold mb-2">Розклад</h3>
-                    <p class="text-sm text-gray-600">Кожен день — новий урок</p>
+                <div class="flex items-center space-x-4 bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <p class="font-medium text-lg">Розуміння своїх сценаріїв</p>
                 </div>
-                 <!-- Step 3 -->
-                 <div class="bg-white p-6 rounded-xl text-center shadow-sm h-full">
-                    <div class="text-4xl mb-4">🚀</div>
-                    <h3 class="font-bold mb-2">Старт</h3>
-                    <p class="text-sm text-gray-600">Початок одразу після оплати</p>
+                <div class="flex items-center space-x-4 bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <p class="font-medium text-lg">Вміння ставити межі</p>
                 </div>
-                 <!-- Step 4 -->
-                 <div class="bg-white p-6 rounded-xl text-center shadow-sm h-full">
-                    <div class="text-4xl mb-4">💬</div>
-                    <h3 class="font-bold mb-2">Підтримка</h3>
-                    <p class="text-sm text-gray-600">Telegram-група (1 місяць доступу)</p>
+                <div class="flex items-center space-x-4 bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <p class="font-medium text-lg">Розуміння чоловіків і себе</p>
                 </div>
+                <div class="flex items-center space-x-4 bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <p class="font-medium text-lg">Контакт з тілом і емоціями</p>
+                </div>
+                <div class="flex items-center space-x-4 bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <p class="font-medium text-lg">Навички будувати любов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 4: Программа -->
+    <section id="program" class="py-24 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16">Програма курсу</h2>
+            
+            <div class="space-y-6">
+                <!-- Lesson Template -->
+                <details class="group bg-white rounded-2xl border border-gray-100 shadow-sm cursor-pointer transition-all duration-300 open:shadow-xl open:border-brand-accent/50">
+                    <summary class="flex justify-between items-center p-6 font-bold text-xl select-none">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-brand-lightpink text-brand-accent flex items-center justify-center text-sm font-bold">1</span>
+                            <span>Роль масок</span>
+                        </div>
+                        <span class="text-gray-400 transition-transform duration-300 group-open:rotate-180 group-open:text-brand-accent">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 pt-0 text-gray-600 pl-16">
+                        Розбираємо, які ролі ми граємо та як вони заважають бути собою. Практичні завдання на виявлення "чужих" сценаріїв.
+                    </div>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-gray-100 shadow-sm cursor-pointer transition-all duration-300 open:shadow-xl open:border-brand-accent/50">
+                    <summary class="flex justify-between items-center p-6 font-bold text-xl select-none">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-brand-lightpink text-brand-accent flex items-center justify-center text-sm font-bold">2</span>
+                            <span>Внутрішня опора</span>
+                        </div>
+                        <span class="text-gray-400 transition-transform duration-300 group-open:rotate-180 group-open:text-brand-accent">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 pt-0 text-gray-600 pl-16">
+                        Техніки відновлення власного стрижня. Як не залежати від думки інших.
+                    </div>
+                </details>
+                
+                <details class="group bg-white rounded-2xl border border-gray-100 shadow-sm cursor-pointer transition-all duration-300 open:shadow-xl open:border-brand-accent/50">
+                    <summary class="flex justify-between items-center p-6 font-bold text-xl select-none">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-brand-lightpink text-brand-accent flex items-center justify-center text-sm font-bold">3</span>
+                            <span>Егоїзм vs любов до себе</span>
+                        </div>
+                        <span class="text-gray-400 transition-transform duration-300 group-open:rotate-180 group-open:text-brand-accent">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 pt-0 text-gray-600 pl-16">
+                        Де грань? Вчимося обирати себе без почуття провини.
+                    </div>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-gray-100 shadow-sm cursor-pointer transition-all duration-300 open:shadow-xl open:border-brand-accent/50">
+                    <summary class="flex justify-between items-center p-6 font-bold text-xl select-none">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-brand-lightpink text-brand-accent flex items-center justify-center text-sm font-bold">4</span>
+                            <span>Про вібрації</span>
+                        </div>
+                        <span class="text-gray-400 transition-transform duration-300 group-open:rotate-180 group-open:text-brand-accent">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 pt-0 text-gray-600 pl-16">
+                        Як твій стан формує твою реальність.
+                    </div>
+                </details>
+                
+                <details class="group bg-white rounded-2xl border border-gray-100 shadow-sm cursor-pointer transition-all duration-300 open:shadow-xl open:border-brand-accent/50">
+                    <summary class="flex justify-between items-center p-6 font-bold text-xl select-none">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-brand-lightpink text-brand-accent flex items-center justify-center text-sm font-bold">5</span>
+                            <span>Потреби чоловіка і жінки</span>
+                        </div>
+                        <span class="text-gray-400 transition-transform duration-300 group-open:rotate-180 group-open:text-brand-accent">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 pt-0 text-gray-600 pl-16">
+                        Секрети гармонійних стосунків. Чого насправді хочуть чоловіки?
+                    </div>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-gray-100 shadow-sm cursor-pointer transition-all duration-300 open:shadow-xl open:border-brand-accent/50">
+                    <summary class="flex justify-between items-center p-6 font-bold text-xl select-none">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-brand-lightpink text-brand-accent flex items-center justify-center text-sm font-bold">6</span>
+                            <span>Конфліктологія</span>
+                        </div>
+                        <span class="text-gray-400 transition-transform duration-300 group-open:rotate-180 group-open:text-brand-accent">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 pt-0 text-gray-600 pl-16">
+                        Як сваритися так, щоб ставати ближчими.
+                    </div>
+                </details>
             </div>
         </div>
     </section>
 
     <!-- Блок 6: Об авторе -->
-    <section class="py-20 bg-white">
+    <section class="py-24 bg-gradient-to-b from-brand-lightpink/30 to-white">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
-                <!-- Фото автора (fotoavtora.jpg) -->
-                <div class="w-64 h-64 md:w-80 md:h-80 shrink-0 relative">
+            <div class="bg-white rounded-[3rem] p-8 md:p-12 shadow-2xl max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12 border border-white/50 relative overflow-hidden">
+                <!-- Декор -->
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl"></div>
+                
+                <div class="w-72 h-72 md:w-80 md:h-80 shrink-0 relative z-10">
                     <div class="absolute inset-0 bg-brand-accent rounded-full blur-xl opacity-20 transform translate-y-4"></div>
-                    <img src="fotoavtora.jpg" alt="Author" class="w-full h-full object-cover rounded-full border-4 border-white shadow-2xl relative z-10" onerror="this.src='https://placehold.co/400x400?text=Author+Photo'">
+                    <img src="fotoavtora.jpg" alt="Ilona" class="w-full h-full object-cover rounded-full border-8 border-white shadow-2xl relative z-10" onerror="this.src='https://placehold.co/400x400?text=Ilona+Photo'">
                 </div>
                 
-                <div class="text-center md:text-left">
-                    <h2 class="text-3xl font-bold mb-6">Привіт, я Ілона…</h2>
-                    <div class="text-lg text-gray-700 space-y-4 leading-relaxed">
+                <div class="text-center md:text-left relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Привіт, я Ілона…</h2>
+                    <div class="text-lg text-gray-600 space-y-4 leading-relaxed font-medium">
                         <p>
-                            Я психолог та жінка, яка пройшла шлях від болю до внутрішньої сили. Я створила цей курс, щоб допомогти тобі віднайти себе.
+                            Я психолог та жінка, яка пройшла шлях від болю до внутрішньої сили. Я створила цей курс, щоб допомогти тобі скоротити цей шлях.
                         </p>
                         <p>
-                            Моя місія — показати, що ти можеш бути щасливою, незалежно від минулого. Всі методи, якими я ділюся, перевірені на практиці.
+                            Моя місія — показати, що ти можеш бути щасливою, незалежно від минулого. Всі методи, якими я ділюся, перевірені на практиці тисячами жінок.
                         </p>
-                        <p class="italic font-semibold text-brand-accent">
-                            "Щастя починається з тебе."
-                        </p>
+                    </div>
+                    <div class="mt-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Signature_sample.svg" alt="Signature" class="h-12 opacity-50 mx-auto md:mx-0 filter invert-[0.3]">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Блок 7: Отзывы (Infinite Marquee) -->
-    <section class="py-20 bg-brand-bg overflow-hidden">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Живі <span class="text-brand-accent">відгуки</span></h2>
+    <!-- Блок 7: Отзывы (Infinite Carousel) -->
+    <section id="reviews" class="py-24 bg-brand-bg overflow-hidden">
+        <h2 class="text-3xl md:text-5xl font-bold text-center mb-16">Живі <span class="gradient-text">відгуки</span></h2>
         
-        <!-- Контейнер для слайдера -->
         <div class="relative w-full">
-            <!-- Градиенты по бокам для плавности -->
-            <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-brand-bg to-transparent z-10"></div>
-            <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-brand-bg to-transparent z-10"></div>
+            <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-brand-bg to-transparent z-10"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-brand-bg to-transparent z-10"></div>
             
-            <!-- Движущаяся лента -->
-            <div class="flex gap-6 animate-marquee w-max py-4 hover:[animation-play-state:paused]">
-                <!-- Набор картинок (дублируем 2 раза для плавного цикла) -->
-                
-                <!-- Цикл 1 -->
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz1.jpg" alt="Review 1" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+1'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz2.jpg" alt="Review 2" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+2'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz3.jpg" alt="Review 3" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+3'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz4.jpg" alt="Review 4" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+4'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz5.jpg" alt="Review 5" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+5'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz6.jpg" alt="Review 6" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+6'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz7.jpg" alt="Review 7" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+7'">
-                </div>
-
-                <!-- Дубликат для бесконечности -->
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz1.jpg" alt="Review 1" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+1'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz2.jpg" alt="Review 2" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+2'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz3.jpg" alt="Review 3" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+3'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz4.jpg" alt="Review 4" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+4'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz5.jpg" alt="Review 5" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+5'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz6.jpg" alt="Review 6" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+6'">
-                </div>
-                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
-                    <img src="otz7.jpg" alt="Review 7" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+7'">
-                </div>
+            <div class="flex gap-8 animate-marquee w-max py-4 hover:[animation-play-state:paused]">
+                <!-- Loop 1 -->
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz1.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+1'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz2.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+2'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz3.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+3'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz4.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+4'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz5.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+5'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz6.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+6'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz7.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+7'"></div>
+                <!-- Loop 2 (Duplicate) -->
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz1.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+1'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz2.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+2'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz3.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+3'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz4.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+4'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz5.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+5'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz6.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+6'"></div>
+                <div class="w-80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 transform hover:scale-105 transition duration-300"><img src="otz7.jpg" class="w-full" onerror="this.src='https://placehold.co/320x500?text=Review+7'"></div>
             </div>
         </div>
     </section>
 
     <!-- Блок 8: FAQ -->
-    <section class="py-20 bg-white">
+    <section class="py-24 bg-white">
         <div class="container mx-auto px-4 max-w-3xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Часті запитання</h2>
-            
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16">Часті запитання</h2>
             <div class="space-y-4">
-                <details class="group bg-brand-bg rounded-xl p-5 cursor-pointer transition-all duration-300 open:bg-brand-lightpink">
-                    <summary class="flex justify-between items-center font-semibold text-lg">
+                <details class="group bg-brand-bg rounded-2xl p-6 cursor-pointer transition-all duration-300 open:bg-brand-lightpink open:shadow-md">
+                    <summary class="flex justify-between items-center font-bold text-lg select-none">
                         <span>А якщо я в розгубленому стані?</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-plus"></i></span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-45"><i class="fa-solid fa-plus text-xl"></i></span>
                     </summary>
-                    <div class="mt-4 text-gray-600">
+                    <div class="mt-4 text-gray-700 leading-relaxed">
                         Це найкращий час. Курс побудований так, щоб м’яко вивести вас із цього стану.
                     </div>
                 </details>
-
-                <details class="group bg-brand-bg rounded-xl p-5 cursor-pointer transition-all duration-300 open:bg-brand-lightpink">
-                    <summary class="flex justify-between items-center font-semibold text-lg">
+                <details class="group bg-brand-bg rounded-2xl p-6 cursor-pointer transition-all duration-300 open:bg-brand-lightpink open:shadow-md">
+                    <summary class="flex justify-between items-center font-bold text-lg select-none">
                         <span>А якщо я вже проходила схожі курси?</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-plus"></i></span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-45"><i class="fa-solid fa-plus text-xl"></i></span>
                     </summary>
-                    <div class="mt-4 text-gray-600">
-                        Мій підхід базується на практиці та особистому досвіді, який може стати тим самим "пазлом", якого вам не вистачало.
+                    <div class="mt-4 text-gray-700 leading-relaxed">
+                        Мій підхід унікальний. Він поєднує глибоку психологію з енергетичними практиками, що дає результат навіть досвідченим.
                     </div>
                 </details>
-
-                <details class="group bg-brand-bg rounded-xl p-5 cursor-pointer transition-all duration-300 open:bg-brand-lightpink">
-                    <summary class="flex justify-between items-center font-semibold text-lg">
-                        <span>А якщо не буде змін?</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-plus"></i></span>
-                    </summary>
-                    <div class="mt-4 text-gray-600">
-                        Якщо ви будете виконувати завдання, зміни неминучі. Ми працюємо з вашою внутрішньою опорою.
-                    </div>
-                </details>
-
-                <details class="group bg-brand-bg rounded-xl p-5 cursor-pointer transition-all duration-300 open:bg-brand-lightpink">
-                    <summary class="flex justify-between items-center font-semibold text-lg">
+                <details class="group bg-brand-bg rounded-2xl p-6 cursor-pointer transition-all duration-300 open:bg-brand-lightpink open:shadow-md">
+                    <summary class="flex justify-between items-center font-bold text-lg select-none">
                         <span>Чи можу я повернути гроші?</span>
-                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-plus"></i></span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-45"><i class="fa-solid fa-plus text-xl"></i></span>
                     </summary>
-                    <div class="mt-4 text-gray-600">
-                        Ми впевнені в якості продукту, тому обговорюємо індивідуальні умови до старту навчання.
+                    <div class="mt-4 text-gray-700 leading-relaxed">
+                        Ми гарантуємо якість. Якщо після першого уроку ви зрозумієте, що це не ваше — ми повернемо кошти.
                     </div>
                 </details>
             </div>
-        </div>
-    </section>
-
-    <!-- Блок 9: Финальный CTA -->
-    <section id="join" class="py-24 bg-brand-lightpink relative overflow-hidden">
-        <div class="absolute -top-20 -right-20 w-64 h-64 bg-brand-accent opacity-10 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-brand-accent opacity-10 rounded-full blur-3xl"></div>
-        
-        <div class="container mx-auto px-4 text-center relative z-10">
-            <h2 class="text-3xl md:text-5xl font-bold mb-8">Готова зробити крок до себе?</h2>
-            <button class="bg-brand-accent text-white text-xl font-bold px-12 py-5 rounded-full shadow-2xl hover:shadow-brand-accent/50 hover:scale-105 transition-all duration-300 animate-pulse-slow">
-                ПРИЄДНАТИСЯ ДО КУРСУ
-            </button>
-            <p class="mt-6 text-sm text-gray-500">Безпечна оплата • Миттєвий доступ</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-[#1a1a1a] text-white py-16 pb-32 md:pb-16">
         <div class="container mx-auto px-4 text-center">
-            <div class="text-2xl font-bold mb-6 tracking-wide">Фокус Кохання</div>
-            
-            <div class="flex justify-center space-x-6 mb-8">
-                <a href="#" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-instagram text-2xl"></i></a>
-                <a href="#" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-telegram text-2xl"></i></a>
-                <a href="#" class="hover:text-brand-accent transition-colors"><i class="fa-regular fa-envelope text-2xl"></i></a>
+            <div class="text-3xl font-extrabold mb-8 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-pink-300">ФОКУС КОХАННЯ</div>
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-accent transition-all hover:-translate-y-2"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-accent transition-all hover:-translate-y-2"><i class="fa-brands fa-telegram text-xl"></i></a>
             </div>
-            
-            <p class="text-gray-500 text-sm">
-                &copy; 2024 Всі права захищені.<br>
-                Політика конфіденційності
-            </p>
+            <p class="text-gray-500 text-sm">&copy; 2024 Всі права захищені.</p>
         </div>
     </footer>
 
+    <!-- 🔥 STICKY ACTION BAR (Всегда внизу) -->
+    <div id="sticky-bar" class="fixed bottom-0 left-0 w-full z-50 glass border-t border-brand-accent/20 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] transition-transform duration-500 translate-y-full">
+        <div class="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center max-w-5xl">
+            <!-- Price & Timer -->
+            <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-6">
+                <div class="flex items-baseline gap-2">
+                    <span class="text-xs md:text-sm text-gray-500 line-through">2350 грн</span>
+                    <span class="text-2xl md:text-3xl font-extrabold text-brand-accent">450 грн</span>
+                </div>
+                <div class="hidden md:flex items-center gap-2 text-red-500 font-mono font-bold bg-red-50 px-3 py-1 rounded-md border border-red-100">
+                    <i class="fa-regular fa-clock animate-pulse"></i> <span id="sticky-timer">10:00</span>
+                </div>
+                <!-- Mobile Timer (Small) -->
+                <div class="md:hidden text-xs text-red-500 font-bold flex items-center gap-1">
+                    <i class="fa-regular fa-clock"></i> <span id="mobile-timer">10:00</span>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <a href="#join" class="gradient-bg text-white text-sm md:text-lg font-bold px-6 md:px-10 py-3 rounded-full shadow-lg hover:shadow-brand-accent/50 hover:scale-105 transition-all duration-300 uppercase tracking-wide">
+                Приєднатися
+            </a>
+        </div>
+    </div>
+
+    <!-- Timer Logic & Scroll Logic -->
+    <script>
+        // --- TIMER LOGIC ---
+        function startTimer(duration, displays) {
+            let timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                displays.forEach(display => {
+                    if(display) display.textContent = minutes + ":" + seconds;
+                });
+
+                if (--timer < 0) {
+                    timer = duration; // Reset loop
+                }
+            }, 1000);
+        }
+
+        // --- SCROLL & INIT ---
+        window.onload = function () {
+            // Start 10 min timer
+            const tenMinutes = 60 * 10;
+            const displayHero = document.querySelector('#hero-timer');
+            const displaySticky = document.querySelector('#sticky-timer');
+            const displayMobile = document.querySelector('#mobile-timer');
+            startTimer(tenMinutes, [displayHero, displaySticky, displayMobile]);
+
+            // Show Sticky Bar after scrolling a bit
+            const stickyBar = document.getElementById('sticky-bar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    stickyBar.classList.remove('translate-y-full');
+                } else {
+                    stickyBar.classList.add('translate-y-full');
+                }
+            });
+        };
+    </script>
 </body>
 </html>
