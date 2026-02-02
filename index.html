@@ -1,900 +1,488 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Діагностика обличчя | Svitlana Tape</title>
-    
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1548773689373078'); // <-- ЗАМІНИ YOUR_PIXEL_ID_HERE на свій ID
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1548773689373078&ev=PageView&noscript=1"/></noscript>
-    <!-- End Meta Pixel Code -->
-    
-    <!-- Tailwind CSS -->
+    <title>Фокус кохання | Онлайн-курс</title>
+    <!-- Подключение Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
+    <!-- Подключение шрифта Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Иконки -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Бібліотека для телефонів -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
-
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #0b0d12;
-            color: #ffffff;
-        }
-        
-        /* Анімації */
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Hero Background */
-        .hero-section {
-            background-image: url('fonfoto.jpg');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-        
-        .hero-overlay {
-            background: linear-gradient(
-                to bottom, 
-                rgba(11, 13, 18, 0.3) 0%,
-                rgba(11, 13, 18, 0.7) 60%,
-                #0b0d12 100%
-            );
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Картки */
-        .custom-card {
-            background: linear-gradient(145deg, #13161c 0%, #0f1116 100%);
-            border: 1px solid #2d323e;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        .custom-card:hover {
-            border-color: #E13030;
-            transform: translateY(-5px);
-        }
-
-        .value-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid #E13030;
-        }
-
-        .price-badge {
-            background: rgba(225, 48, 48, 0.9);
-            border: 1px solid #E13030;
-            color: #ffffff;
-            box-shadow: 0 0 20px rgba(225, 48, 48, 0.4);
-        }
-
-        .price-glow { text-shadow: 0 0 20px rgba(225, 48, 48, 0.8); }
-
-        /* Таймер */
-        .timer-box {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px dashed #E13030;
-            backdrop-filter: blur(5px);
-            animation: pulse-border 2s infinite;
-        }
-        @keyframes pulse-border {
-            0% { border-color: #E13030; }
-            50% { border-color: #ff6b6b; box-shadow: 0 0 15px rgba(225, 48, 48, 0.3); }
-            100% { border-color: #E13030; }
-        }
-
-        /* Інпути */
-        .custom-input {
-            background-color: #1a1d26;
-            border: 1px solid #2d323e;
-            color: white;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        .custom-input:focus {
-            border-color: #E13030;
-            box-shadow: 0 0 0 4px rgba(225, 48, 48, 0.1);
-            outline: none;
-        }
-
-        /* ВАЛІДАЦІЯ ПОМИЛОК */
-        .input-error {
-            border-color: #ff3b3b !important;
-            box-shadow: 0 0 0 4px rgba(255, 59, 59, 0.2) !important;
-            animation: shake 0.4s ease-in-out;
-        }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
-        .error-message-text {
-            color: #ff3b3b;
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-            display: none;
-        }
-
-        /* INFINITE SLIDER STYLES */
-        .infinite-slider-container {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-        
-        .infinite-slider-track {
-            display: flex;
-            gap: 1rem;
-            transition: transform 0.4s ease;
-        }
-        
-        .infinite-slider-track.no-transition {
-            transition: none;
-        }
-        
-        .slider-item {
-            flex: 0 0 85%;
-            min-width: 85%;
-        }
-        
-        @media (min-width: 768px) {
-            .slider-item {
-                flex: 0 0 40%;
-                min-width: 40%;
-            }
-        }
-        
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 20;
-            background: rgba(225, 48, 48, 0.9);
-            border: none;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(225, 48, 48, 0.4);
-        }
-        
-        .slider-nav:hover {
-            background: #b91c1c;
-            transform: translateY(-50%) scale(1.1);
-        }
-        
-        .slider-nav.prev {
-            left: 10px;
-        }
-        
-        .slider-nav.next {
-            right: 10px;
-        }
-        
-        @media (max-width: 767px) {
-            .slider-nav {
-                width: 35px;
-                height: 35px;
-            }
-        }
-
-        /* Кнопки */
-        .cta-btn {
-            background-color: #E13030;
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(225, 48, 48, 0.3);
-            width: 100%;
-        }
-        .cta-btn:hover {
-            background-color: #b91c1c;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(225, 48, 48, 0.5);
-        }
-        .cta-btn:disabled {
-            background-color: #555;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        .mobile-fixed-btn {
-            position: fixed;
-            bottom: 20px; left: 50%; transform: translateX(-50%); width: 94%; z-index: 40;
-            background-color: #E13030; box-shadow: 0 5px 20px rgba(225, 48, 48, 0.5);
-        }
-
-        /* MODAL STYLES */
-        .modal-overlay {
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-        }
-        .modal-content {
-            background: linear-gradient(145deg, #13161c 0%, #0b0d12 100%);
-            border: 1px solid #E13030;
-            box-shadow: 0 0 50px rgba(225, 48, 48, 0.2);
-        }
-
-        /* Intl Tel Input Dark Theme */
-        .iti { width: 100%; }
-        .iti__country-list { background-color: #1a1d26; border: 1px solid #2d323e; color: white; }
-        .iti__tel-input {
-            background-color: #1a1d26 !important;
-            border: 1px solid #2d323e !important;
-            color: white !important;
-            border-radius: 0.75rem !important;
-            padding-top: 1rem !important; padding-bottom: 1rem !important;
-        }
-        .iti__tel-input:focus {
-            border-color: #E13030 !important;
-            box-shadow: 0 0 0 4px rgba(225, 48, 48, 0.1);
-            outline: none !important;
-        }
-    </style>
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: { DEFAULT: '#E13030', hover: '#b91c1c' },
-                        dark: { bg: '#0b0d12', card: '#13161c', border: '#2d323e' }
+                        brand: {
+                            bg: '#FAFAFA', // Светло-бежевый/белый
+                            accent: '#E60073', // Ярко-розовый
+                            text: '#333333', // Темно-серый текст
+                            lightpink: '#FFF5F7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 40s linear infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
                 }
             }
         }
     </script>
-</head>
-<body class="min-h-screen flex flex-col items-center overflow-x-hidden relative">
-
-    <!-- ========================================== -->
-    <!-- HERO SECTION -->
-    <!-- ========================================== -->
-    <header class="w-full hero-section flex flex-col items-center justify-center min-h-[100dvh] md:min-h-[850px]">
-        <div class="hero-overlay"></div>
+    
+    <style>
+        /* Скрытие скроллбара для красоты карусели, если нужно */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
         
-        <!-- ПРАВКА: mt-4 для мобільних для підняття тексту -->
-        <div class="hero-content w-full max-w-4xl px-4 py-8 md:py-12 flex flex-col items-center text-center mt-4 md:mt-0">
-            
-            <div class="fade-in-up mb-4 md:mb-6">
-                <span class="price-badge px-6 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-widest animate-pulse">
-                    Персональна діагностика
-                </span>
+        /* Плавное открытие аккордеона */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: sweep .3s ease-in-out;
+        }
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-10px)}
+            100%  {opacity: 1; transform: translateY(0)}
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased overflow-x-hidden relative">
+
+    <!-- Sticky Header -->
+    <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-brand-accent tracking-wide uppercase">
+                Фокус Кохання
             </div>
-
-            <h1 class="text-2xl md:text-5xl lg:text-6xl font-extrabold mb-2 md:mb-4 leading-tight fade-in-up uppercase text-white drop-shadow-xl">
-                Отримай рішення як виглядати <br>на 10 років <span class="text-brand">молодше</span> і прибрати зморшки
-            </h1>
-            
-            <h2 class="text-lg md:text-2xl lg:text-3xl font-extrabold mb-4 md:mb-6 leading-tight fade-in-up uppercase text-white drop-shadow-xl">
-                — без уколів, ботоксу та дорогих косметологів
-            </h2>
-
-            <p class="text-gray-100 text-sm md:text-xl max-w-2xl mb-6 md:mb-8 fade-in-up font-medium drop-shadow-lg leading-tight" style="animation-delay: 0.1s;">
-                Отримай персональну діагностику, на якій я детально розберу твоє обличчя. Ти отримаєш чіткий покроковий план та всі рекомендації.
-            </p>
-
-            <!-- ПРАВКА 4: Компактна вертикальна плашка ціни -->
-            <div class="flex flex-col items-center gap-3 mb-6 md:mb-10 fade-in-up" style="animation-delay: 0.2s;">
-                <div class="flex flex-col items-center bg-black/60 px-8 py-3 rounded-2xl backdrop-blur-md border border-white/10 shadow-xl min-w-[200px]">
-                    <span class="text-5xl md:text-7xl font-extrabold text-white price-glow leading-none">590 грн</span>
-                    <span class="text-gray-400 text-sm md:text-xl line-through decoration-red-500/80 decoration-2 mt-2">1790 грн</span>
-                </div>
-                
-                <!-- ПРАВКА: Текст таймера та час 10:00 -->
-                <div class="timer-box px-6 py-2 rounded-xl flex items-center gap-3 mt-1 shadow-lg">
-                    <span class="text-gray-200 text-[10px] md:text-xs font-bold uppercase tracking-widest">До збільшення ціни:</span>
-                    <span id="countdown" class="text-xl md:text-2xl font-mono font-bold text-brand w-[80px] text-center">10:00</span>
-                </div>
-            </div>
-
-            <!-- ПРАВКА: Новий текст кнопки -->
-            <button onclick="openModal()" class="flex cta-btn text-lg font-bold py-4 md:py-5 px-12 md:px-16 rounded-full uppercase tracking-wide items-center justify-center gap-3 fade-in-up max-w-sm" style="animation-delay: 0.3s;">
-                Хочу розбір обличчя <i class="fa-solid fa-angle-right"></i>
-            </button>
+            <a href="#join" class="hidden md:inline-block bg-brand-accent text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-brand-accent/50 hover:scale-105 transition-all duration-300">
+                Приєднатися
+            </a>
         </div>
     </header>
 
-    <!-- ========================================== -->
-    <!-- ДОКАЗИ (Слайдер) - БЕЗКІНЕЧНИЙ -->
-    <!-- ========================================== -->
-    <section class="w-full max-w-6xl px-4 py-12 relative z-10 -mt-10 md:-mt-20">
-        <h2 class="text-lg md:text-xl font-bold text-white mb-6 text-center uppercase tracking-widest bg-dark-bg/80 backdrop-blur inline-block px-6 py-2 rounded-full border border-dark-border mx-auto block w-fit">
-            Ось як змінюються обличчя після діагностики:
-        </h2>
-        
-        <div class="infinite-slider-container" id="proofs-slider">
-            <button class="slider-nav prev" onclick="slideProofs(-1)">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="infinite-slider-track" id="proofs-track">
-                <!-- Оригінальні слайди -->
-                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="reviews7.jpg" alt="Результат До Після 7" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="reviews8.jpg" alt="Результат До Після 8" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="reviews9.jpg" alt="Результат До Після 9" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="reviews10.jpg" alt="Результат До Після 10" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <!-- НОВІ 4 ФОТО - додай файли з такими назвами -->
-                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="reviews11.jpg" alt="Результат До Після 11" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="reviews12.jpg" alt="Результат До Після 12" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="reviews13.jpg" alt="Результат До Після 13" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="reviews14.jpg" alt="Результат До Після 14" class="w-full h-auto rounded-xl object-contain">
-                </div>
-            </div>
-            <button class="slider-nav next" onclick="slideProofs(1)">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
-        <p class="text-center text-gray-500 text-xs mt-4 uppercase tracking-widest md:hidden">
-            <i class="fa-solid fa-arrows-left-right mr-2"></i> Гортай вправо
-        </p>
-    </section>
+    <!-- Floating Mobile Button (always visible) -->
+    <a href="#join" class="fixed bottom-6 right-6 z-50 md:hidden bg-brand-accent text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 animate-pulse-slow">
+        <i class="fa-solid fa-heart text-xl"></i>
+    </a>
 
-    <!-- ========================================== -->
-    <!-- ДЛЯ КОГО -->
-    <!-- ========================================== -->
-    <section class="w-full max-w-5xl px-4 py-16 relative z-10">
-        <div class="text-center mb-12">
-            <h2 class="text-2xl md:text-3xl font-bold text-white uppercase mb-4">
-                Чому ти старієш <span class="text-brand">швидше, ніж могла б?</span>
-            </h2>
-            <p class="text-gray-400">90% дівчат роблять одні й ті самі помилки.</p>
+    <!-- Блок 1: Hero -->
+    <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <!-- Фон -->
+        <div class="absolute inset-0 z-0">
+            <!-- Умная вставка картинки: fonna1slaid.jpg -->
+            <img src="fonna1slaid.jpg" alt="Background" class="w-full h-full object-cover object-center" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'">
+            <!-- Градиент для читаемости текста -->
+            <div class="absolute inset-0 bg-white/40 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
         </div>
-        <div class="space-y-4">
-            <div class="value-card p-6 rounded-r-xl">
-                <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
-                    <i class="fa-solid fa-triangle-exclamation text-brand"></i> Сліпе копіювання
-                </h3>
-                <p class="text-gray-400 text-sm">Ти робиш вправи з Instagram, не знаючи, що вони можуть поглиблювати зморшки.</p>
-            </div>
-            <div class="value-card p-6 rounded-r-xl">
-                <!-- ПРАВКА 3: "Уколи — пастка" -->
-                <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
-                    <i class="fa-solid fa-syringe text-brand"></i> Уколи — пастка
-                </h3>
-                <p class="text-gray-400 text-sm">Замість вирішення причини, уколи часто просто "заморожують" проблему та погіршують лімфовідтік.</p>
-            </div>
-            <div class="value-card p-6 rounded-r-xl">
-                <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
-                    <i class="fa-solid fa-hand-holding-dollar text-brand"></i> Боротьба з наслідками
-                </h3>
-                <p class="text-gray-400 text-sm">Без усунення причини (затиснута шия, застій лімфи) креми — це гроші на вітер.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- ========================================== -->
-    <!-- ЩО ВСЕРЕДИНІ -->
-    <!-- ========================================== -->
-    <section class="w-full bg-dark-card border-y border-dark-border py-16 mt-12">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 text-center uppercase">Косметологи <span class="text-brand">приховують</span> це, бо <span class="text-brand">заробляють</span> на тобі</h2>
-            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Я глибоко аналізую твої фото та анкету і записую детальні голосові та відео-повідомлення.
+        <div class="container mx-auto px-4 z-10 text-center max-w-3xl animate-fade-in-up">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                Віднайди <span class="text-brand-accent">внутрішню опору</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-10 font-medium">
+                7-денний онлайн-курс для жінок. Віднови зв’язок із собою, відчуй силу, навчись будувати здорові стосунки.
             </p>
-            <div class="space-y-6">
-                <div class="custom-card p-6 md:p-8 rounded-2xl border-l-4 border-brand relative overflow-hidden">
-                    <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3"><i class="fa-solid fa-dna text-brand"></i> Повний "рентген" обличчя</h3>
-                    <p class="text-gray-300 text-sm md:text-base leading-relaxed pl-8">Я поясню твій тип старіння і покажу приховані причини змін.</p>
+            <a href="#join" class="inline-block bg-brand-accent text-white text-lg font-bold px-10 py-4 rounded-full shadow-xl hover:shadow-2xl hover:shadow-brand-accent/40 transform hover:-translate-y-1 transition-all duration-300">
+                ПРИЄДНАТИСЯ ЗАРАЗ
+            </a>
+        </div>
+    </section>
+
+    <!-- Блок 2: Для кого курс -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                Цей курс для тебе, <span class="text-brand-accent">якщо…</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
+                        <i class="fa-solid fa-heart-crack text-brand-accent text-xl group-hover:text-white"></i>
+                    </div>
+                    <p class="text-lg font-medium">Пережила розлучення, втрату або зраду.</p>
                 </div>
-                <div class="custom-card p-6 md:p-8 rounded-2xl border-l-4 border-brand relative overflow-hidden">
-                    <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3"><i class="fa-solid fa-list-check text-brand"></i> Персональна стратегія</h3>
-                    <p class="text-gray-300 text-sm md:text-base leading-relaxed pl-8">Ти отримаєш чіткий план: які техніки врятують твоє обличчя, а що заборонено.</p>
+                <!-- Card 2 -->
+                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
+                        <i class="fa-solid fa-feather text-brand-accent text-xl group-hover:text-white"></i>
+                    </div>
+                    <p class="text-lg font-medium">Не знаєш, як відпустити минуле.</p>
                 </div>
-            </div>
-            <div class="text-center mt-10">
-                <p class="text-brand font-bold uppercase tracking-widest text-sm animate-pulse mb-4"><i class="fa-solid fa-gift mr-1"></i> Цінність — економія років помилок</p>
-                <button onclick="openModal()" class="cta-btn text-lg font-bold py-4 px-10 rounded-full uppercase tracking-wide inline-flex items-center gap-2">
-                    Хочу такий розбір <i class="fa-solid fa-arrow-down"></i>
-                </button>
+                <!-- Card 3 -->
+                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
+                        <i class="fa-solid fa-person-dress text-brand-accent text-xl group-hover:text-white"></i>
+                    </div>
+                    <p class="text-lg font-medium">Хочеш відчути жіночність і енергію.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
+                        <i class="fa-solid fa-user-lock text-brand-accent text-xl group-hover:text-white"></i>
+                    </div>
+                    <p class="text-lg font-medium">Боїшся залишитись сама.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-brand-bg p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 md:col-span-2 lg:col-span-1 group">
+                    <div class="w-12 h-12 bg-brand-lightpink rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-accent transition-colors">
+                        <i class="fa-solid fa-hands-holding-circle text-brand-accent text-xl group-hover:text-white"></i>
+                    </div>
+                    <p class="text-lg font-medium">Хочеш навчитись будувати гідні стосунки.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- ЕКСПЕРТ (РОЗШИРЕНИЙ БЛОК) -->
-    <!-- ========================================== -->
-    <section class="w-full max-w-5xl mx-auto px-4 py-16">
-        <div class="flex flex-col md:flex-row items-center gap-12">
-            <div class="w-full md:w-1/2 relative">
-                <div class="relative rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(225,48,48,0.15)] border border-dark-border">
-                    <img src="page1.jpg" alt="Svitlana Expert" class="w-full h-auto object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0b0d12] to-transparent opacity-80"></div>
-                    <div class="absolute bottom-6 left-6">
-                        <p class="text-brand text-sm font-bold uppercase tracking-widest mb-1">Експерт</p>
-                        <h3 class="text-3xl font-bold text-white uppercase">Svitlana Gavryliuk</h3>
+    <!-- Блок 3: Что получишь -->
+    <section class="py-20 bg-brand-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                Що ти <span class="text-brand-accent">отримаєш?</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="flex items-start space-x-4">
+                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
+                    <p class="text-lg">Впевненість і внутрішню опору</p>
+                </div>
+                <!-- Item 2 -->
+                <div class="flex items-start space-x-4">
+                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
+                    <p class="text-lg">Розуміння своїх сценаріїв у стосунках</p>
+                </div>
+                <!-- Item 3 -->
+                <div class="flex items-start space-x-4">
+                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
+                    <p class="text-lg">Вміння ставити межі без конфліктів</p>
+                </div>
+                <!-- Item 4 -->
+                <div class="flex items-start space-x-4">
+                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
+                    <p class="text-lg">Краще розуміння чоловіків і себе</p>
+                </div>
+                <!-- Item 5 -->
+                <div class="flex items-start space-x-4">
+                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
+                    <p class="text-lg">Контакт з тілом і емоціями</p>
+                </div>
+                <!-- Item 6 -->
+                <div class="flex items-start space-x-4">
+                    <i class="fa-solid fa-check-circle text-brand-accent text-2xl mt-1"></i>
+                    <p class="text-lg">Навички будувати зв’язок із любов’ю</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 4: Программа (Аккордеон) -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Програма курсу</h2>
+            
+            <div class="space-y-4">
+                <!-- Lesson 1 -->
+                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
+                    <summary class="flex justify-between items-center font-semibold text-xl">
+                        <span>1. Роль масок</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
+                        Розбираємо, які ролі ми граємо та як вони заважають бути собою.
+                    </div>
+                </details>
+
+                <!-- Lesson 2 -->
+                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
+                    <summary class="flex justify-between items-center font-semibold text-xl">
+                        <span>2. Внутрішня опора</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
+                        Техніки відновлення власного стрижня та впевненості.
+                    </div>
+                </details>
+
+                <!-- Lesson 3 -->
+                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
+                    <summary class="flex justify-between items-center font-semibold text-xl">
+                        <span>3. Егоїзм vs любов до себе</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
+                        Вчимося відрізняти здорове піклування про себе від егоїзму.
+                    </div>
+                </details>
+
+                <!-- Lesson 4 -->
+                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
+                    <summary class="flex justify-between items-center font-semibold text-xl">
+                        <span>4. Про вібрації</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
+                        Як твій стан впливає на події навколо.
+                    </div>
+                </details>
+
+                <!-- Lesson 5 -->
+                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
+                    <summary class="flex justify-between items-center font-semibold text-xl">
+                        <span>5. Потреби чоловіка і жінки</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
+                        Психологія стосунків і базові потреби партнерів.
+                    </div>
+                </details>
+
+                <!-- Lesson 6 -->
+                <details class="group bg-brand-bg rounded-xl p-4 cursor-pointer transition-all duration-300 open:shadow-lg">
+                    <summary class="flex justify-between items-center font-semibold text-xl">
+                        <span>6. Конфліктологія</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 pl-2 border-l-2 border-brand-accent">
+                        Мистецтво екологічного вирішення спорів.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 5: Как проходит курс -->
+    <section class="py-20 bg-brand-lightpink">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Як це працює?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="bg-white p-6 rounded-xl text-center shadow-sm h-full">
+                    <div class="text-4xl mb-4">💳</div>
+                    <h3 class="font-bold mb-2">Оплата</h3>
+                    <p class="text-sm text-gray-600">Доступ до платформи після оплати</p>
+                </div>
+                 <!-- Step 2 -->
+                 <div class="bg-white p-6 rounded-xl text-center shadow-sm h-full">
+                    <div class="text-4xl mb-4">📅</div>
+                    <h3 class="font-bold mb-2">Розклад</h3>
+                    <p class="text-sm text-gray-600">Кожен день — новий урок</p>
+                </div>
+                 <!-- Step 3 -->
+                 <div class="bg-white p-6 rounded-xl text-center shadow-sm h-full">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="font-bold mb-2">Старт</h3>
+                    <p class="text-sm text-gray-600">Початок одразу після оплати</p>
+                </div>
+                 <!-- Step 4 -->
+                 <div class="bg-white p-6 rounded-xl text-center shadow-sm h-full">
+                    <div class="text-4xl mb-4">💬</div>
+                    <h3 class="font-bold mb-2">Підтримка</h3>
+                    <p class="text-sm text-gray-600">Telegram-група (1 місяць доступу)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 6: Об авторе -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
+                <!-- Фото автора (fotoavtora.jpg) -->
+                <div class="w-64 h-64 md:w-80 md:h-80 shrink-0 relative">
+                    <div class="absolute inset-0 bg-brand-accent rounded-full blur-xl opacity-20 transform translate-y-4"></div>
+                    <img src="fotoavtora.jpg" alt="Author" class="w-full h-full object-cover rounded-full border-4 border-white shadow-2xl relative z-10" onerror="this.src='https://placehold.co/400x400?text=Author+Photo'">
+                </div>
+                
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl font-bold mb-6">Привіт, я Ілона…</h2>
+                    <div class="text-lg text-gray-700 space-y-4 leading-relaxed">
+                        <p>
+                            Я психолог та жінка, яка пройшла шлях від болю до внутрішньої сили. Я створила цей курс, щоб допомогти тобі віднайти себе.
+                        </p>
+                        <p>
+                            Моя місія — показати, що ти можеш бути щасливою, незалежно від минулого. Всі методи, якими я ділюся, перевірені на практиці.
+                        </p>
+                        <p class="italic font-semibold text-brand-accent">
+                            "Щастя починається з тебе."
+                        </p>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Блок 7: Отзывы (Infinite Marquee) -->
+    <section class="py-20 bg-brand-bg overflow-hidden">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Живі <span class="text-brand-accent">відгуки</span></h2>
+        
+        <!-- Контейнер для слайдера -->
+        <div class="relative w-full">
+            <!-- Градиенты по бокам для плавности -->
+            <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-brand-bg to-transparent z-10"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-brand-bg to-transparent z-10"></div>
             
-            <div class="w-full md:w-1/2">
-                <h2 class="text-2xl md:text-4xl font-bold text-white mb-6 uppercase leading-snug">
-                    Я бачу не зморшку, <br><span class="text-brand">а причину</span>
-                </h2>
+            <!-- Движущаяся лента -->
+            <div class="flex gap-6 animate-marquee w-max py-4 hover:[animation-play-state:paused]">
+                <!-- Набор картинок (дублируем 2 раза для плавного цикла) -->
                 
-                <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
-                    <p class="font-medium text-white">
-                        Привіт, я Світлана — спеціаліст з естетичного тейпування та природного омолодження.
-                    </p>
-                    <p>
-                        Я пропрацювала з багатьма обличчями жінок. Мій підхід базується на глибокому знанні анатомії: кісток, м'язів, фасцій та лімфатичної системи. Я не вірю в "погану генетику", я вірю в правильну систему.
-                    </p>
-                    <p>
-                        Багато дівчат приходять до мене зі страхом: "Я боюся щось робити, бо не знаю як", або після невдалих "уколів краси". Моє завдання — не просто дати вправу, а навчити тебе розуміти своє обличчя, як карту.
-                    </p>
-                    <p>
-                        Я не даю шаблонних порад. На діагностиці я розберу саме ТВОЮ ситуацію, щоб ти точно знала, як повернути молодість безпечно та екологічно, без скальпеля та ін'єкцій.
-                    </p>
+                <!-- Цикл 1 -->
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz1.jpg" alt="Review 1" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+1'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz2.jpg" alt="Review 2" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+2'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz3.jpg" alt="Review 3" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+3'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz4.jpg" alt="Review 4" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+4'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz5.jpg" alt="Review 5" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+5'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz6.jpg" alt="Review 6" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+6'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz7.jpg" alt="Review 7" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+7'">
+                </div>
+
+                <!-- Дубликат для бесконечности -->
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz1.jpg" alt="Review 1" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+1'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz2.jpg" alt="Review 2" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+2'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz3.jpg" alt="Review 3" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+3'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz4.jpg" alt="Review 4" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+4'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz5.jpg" alt="Review 5" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+5'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz6.jpg" alt="Review 6" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+6'">
+                </div>
+                <div class="w-72 md:w-80 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0">
+                    <img src="otz7.jpg" alt="Review 7" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/300x500?text=Review+7'">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- ВІДГУКИ - БЕЗКІНЕЧНИЙ СЛАЙДЕР -->
-    <!-- ========================================== -->
-    <section class="w-full bg-dark-card border-y border-dark-border py-16">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-2xl md:text-4xl font-bold text-white mb-10 text-center uppercase">Що кажуть <span class="text-brand">дівчата</span></h2>
+    <!-- Блок 8: FAQ -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Часті запитання</h2>
             
-            <div class="infinite-slider-container" id="reviews-slider">
-                <button class="slider-nav prev" onclick="slideReviews(-1)">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <div class="infinite-slider-track" id="reviews-track">
-                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews1.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews2.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews3.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews4.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews5.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews6.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                </div>
-                <button class="slider-nav next" onclick="slideReviews(1)">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
-            </div>
-            <p class="text-center text-gray-500 text-xs mt-4 uppercase tracking-widest md:hidden"><i class="fa-solid fa-arrows-left-right mr-2"></i> Гортай вправо</p>
-        </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- ГАРАНТІЯ -->
-    <!-- ========================================== -->
-    <section class="w-full max-w-3xl px-4 mx-auto mt-16 mb-24">
-        <div class="bg-dark-card border border-brand/40 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-[0_0_30px_rgba(225,48,48,0.1)]">
-            <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fa-solid fa-shield-halved text-8xl text-brand"></i></div>
-            <div class="flex items-start gap-4 relative z-10">
-                <div class="text-brand text-4xl shrink-0"><i class="fa-solid fa-certificate"></i></div>
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-2 uppercase">100% Гарантія повернення</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Якщо розбір не принесе користі — <strong class="text-white">я поверну вам усі 590 грн</strong>.</p>
-                </div>
-            </div>
-        </div>
-        <div class="mt-8 text-center">
-             <button onclick="openModal()" class="cta-btn text-xl font-bold py-5 px-12 rounded-xl uppercase tracking-wide shadow-lg transform hover:-translate-y-1 transition-all duration-300">
-                Хочу розбір обличчя
-            </button>
-        </div>
-    </section>
-
-    <!-- ПРАВКА: Текст кнопки мобільної плашки -->
-    <button onclick="openModal()" class="md:hidden mobile-fixed-btn text-white text-lg font-bold py-4 rounded-xl uppercase tracking-wide flex justify-center items-center">
-        Хочу розбір обличчя
-    </button>
-
-    <!-- ========================================== -->
-    <!-- MODAL FORM (POPUP) -->
-    <!-- ========================================== -->
-    <div id="order-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center px-4 modal-overlay transition-opacity duration-300">
-        <div class="modal-content w-full max-w-md rounded-3xl p-6 relative fade-in-up">
-            
-            <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
-                <i class="fa-solid fa-xmark text-2xl"></i>
-            </button>
-
-            <h2 class="text-2xl font-bold text-white mb-2 text-center uppercase">Забронювати місце</h2>
-            <p class="text-gray-400 mb-6 text-center text-xs">Введіть дані для зв'язку та отримання розбору.</p>
-
-            <form id="order-form" onsubmit="handleOrderSubmit(event)" class="space-y-4">
-                <!-- ІМ'Я -->
-                <div>
-                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Ваше Ім'я</label>
-                    <input type="text" id="user_name" name="name" placeholder="Олена" class="custom-input rounded-xl py-3 pl-4 pr-4 focus:outline-none placeholder-gray-600">
-                    <p id="error-name" class="error-message-text">Ім'я не може містити цифри</p>
-                </div>
-
-                <!-- TELEGRAM -->
-                <div>
-                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Ваш Telegram</label>
-                    <input type="text" id="user_telegram" name="telegram" placeholder="@username" class="custom-input rounded-xl py-3 pl-4 pr-4 focus:outline-none placeholder-gray-600">
-                    <p id="error-telegram" class="error-message-text">Введіть нік Telegram</p>
-                </div>
-
-                <!-- ТЕЛЕФОН -->
-                <div>
-                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Телефон</label>
-                    <input type="tel" id="phone" name="phone" class="custom-input rounded-xl py-3 focus:outline-none placeholder-gray-600">
-                    <input type="hidden" name="full_phone" id="full_phone">
-                    <input type="hidden" name="country_code" id="country_code">
-                    <p id="error-phone" class="error-message-text">Невірний формат номеру</p>
-                </div>
-
-                <div class="bg-[#0b0d12]/50 rounded-xl p-3 border border-white/5 flex justify-between items-center mt-2">
-                    <span class="text-gray-400 text-sm">До сплати:</span>
-                    <div class="flex items-end gap-2">
-                        <span class="text-gray-600 line-through text-xs decoration-red-500/50">1790 грн</span>
-                        <span class="text-xl font-bold text-white">590 грн</span>
+            <div class="space-y-4">
+                <details class="group bg-brand-bg rounded-xl p-5 cursor-pointer transition-all duration-300 open:bg-brand-lightpink">
+                    <summary class="flex justify-between items-center font-semibold text-lg">
+                        <span>А якщо я в розгубленому стані?</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-plus"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600">
+                        Це найкращий час. Курс побудований так, щоб м’яко вивести вас із цього стану.
                     </div>
-                </div>
+                </details>
 
-                <div id="global-error" class="hidden bg-red-900/30 border border-red-500/50 rounded-lg p-2 text-center mb-2">
-                    <p class="text-red-400 text-xs font-bold uppercase">Будь ласка, виправте помилки</p>
-                </div>
+                <details class="group bg-brand-bg rounded-xl p-5 cursor-pointer transition-all duration-300 open:bg-brand-lightpink">
+                    <summary class="flex justify-between items-center font-semibold text-lg">
+                        <span>А якщо я вже проходила схожі курси?</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-plus"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600">
+                        Мій підхід базується на практиці та особистому досвіді, який може стати тим самим "пазлом", якого вам не вистачало.
+                    </div>
+                </details>
 
-                <button type="submit" class="cta-btn text-lg font-bold py-4 rounded-xl uppercase tracking-wide shadow-lg w-full mt-2">
-                    Перейти до оплати
-                </button>
-            </form>
+                <details class="group bg-brand-bg rounded-xl p-5 cursor-pointer transition-all duration-300 open:bg-brand-lightpink">
+                    <summary class="flex justify-between items-center font-semibold text-lg">
+                        <span>А якщо не буде змін?</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-plus"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600">
+                        Якщо ви будете виконувати завдання, зміни неминучі. Ми працюємо з вашою внутрішньою опорою.
+                    </div>
+                </details>
+
+                <details class="group bg-brand-bg rounded-xl p-5 cursor-pointer transition-all duration-300 open:bg-brand-lightpink">
+                    <summary class="flex justify-between items-center font-semibold text-lg">
+                        <span>Чи можу я повернути гроші?</span>
+                        <span class="text-brand-accent transition-transform group-open:rotate-180"><i class="fa-solid fa-plus"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600">
+                        Ми впевнені в якості продукту, тому обговорюємо індивідуальні умови до старту навчання.
+                    </div>
+                </details>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Скрипти -->
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
-
-    <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZr5XOr3ZcamU2m-1bAmwQ6g4kDJXYHFPKrzQoFqzjYSBt4n8EOMydJeyuObzLEB0/exec'; 
-        const AMOUNT = '1';  // Тестова сума 1 грн
-        const RETURN_URL = 'https://testlendosa.vercel.app/thanks.html';
-
-        // Функція для отримання UTM параметрів з URL
-        function getUTMParams() {
-            const params = new URLSearchParams(window.location.search);
-            return {
-                campaign_name: params.get('campaign_name') || params.get('utm_campaign') || '',
-                adset_name: params.get('adset_name') || params.get('utm_medium') || '',
-                ad_name: params.get('ad_name') || params.get('utm_content') || '',
-                traff_eu: params.get('traff_eu') || ''
-            };
-        }
+    <!-- Блок 9: Финальный CTA -->
+    <section id="join" class="py-24 bg-brand-lightpink relative overflow-hidden">
+        <div class="absolute -top-20 -right-20 w-64 h-64 bg-brand-accent opacity-10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-brand-accent opacity-10 rounded-full blur-3xl"></div>
         
-        // Зберігаємо UTM при завантаженні сторінки
-        const utmParams = getUTMParams();
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-bold mb-8">Готова зробити крок до себе?</h2>
+            <button class="bg-brand-accent text-white text-xl font-bold px-12 py-5 rounded-full shadow-2xl hover:shadow-brand-accent/50 hover:scale-105 transition-all duration-300 animate-pulse-slow">
+                ПРИЄДНАТИСЯ ДО КУРСУ
+            </button>
+            <p class="mt-6 text-sm text-gray-500">Безпечна оплата • Миттєвий доступ</p>
+        </div>
+    </section>
 
-        function openModal() { 
-            document.getElementById('order-modal').classList.remove('hidden'); 
-            document.body.style.overflow = 'hidden';
-            // Meta Pixel: трекаємо відкриття форми
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'InitiateCheckout');
-            }
-        }
-        function closeModal() { document.getElementById('order-modal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
-
-        // ========================================
-        // БЕЗКІНЕЧНИЙ СЛАЙДЕР
-        // ========================================
-        
-        // Слайдер "Докази"
-        let proofsIndex = 0;
-        const proofsTrack = document.getElementById('proofs-track');
-        let proofsSlides;
-        let proofsSlideWidth;
-        let proofsTotalSlides;
-        
-        // Слайдер "Відгуки"
-        let reviewsIndex = 0;
-        const reviewsTrack = document.getElementById('reviews-track');
-        let reviewsSlides;
-        let reviewsSlideWidth;
-        let reviewsTotalSlides;
-        
-        function initSliders() {
-            // Ініціалізація слайдера "Докази"
-            proofsSlides = proofsTrack.querySelectorAll('.slider-item');
-            proofsTotalSlides = proofsSlides.length;
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="text-2xl font-bold mb-6 tracking-wide">Фокус Кохання</div>
             
-            // Клонуємо слайди для безкінечності
-            proofsSlides.forEach(slide => {
-                const clone = slide.cloneNode(true);
-                proofsTrack.appendChild(clone);
-            });
-            proofsSlides.forEach(slide => {
-                const clone = slide.cloneNode(true);
-                proofsTrack.insertBefore(clone, proofsTrack.firstChild);
-            });
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-instagram text-2xl"></i></a>
+                <a href="#" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-telegram text-2xl"></i></a>
+                <a href="#" class="hover:text-brand-accent transition-colors"><i class="fa-regular fa-envelope text-2xl"></i></a>
+            </div>
             
-            // Ініціалізація слайдера "Відгуки"
-            reviewsSlides = reviewsTrack.querySelectorAll('.slider-item');
-            reviewsTotalSlides = reviewsSlides.length;
-            
-            // Клонуємо слайди для безкінечності
-            reviewsSlides.forEach(slide => {
-                const clone = slide.cloneNode(true);
-                reviewsTrack.appendChild(clone);
-            });
-            reviewsSlides.forEach(slide => {
-                const clone = slide.cloneNode(true);
-                reviewsTrack.insertBefore(clone, reviewsTrack.firstChild);
-            });
-            
-            updateSliderDimensions();
-            window.addEventListener('resize', updateSliderDimensions);
-        }
-        
-        function updateSliderDimensions() {
-            // Докази
-            const proofsFirstSlide = proofsTrack.querySelector('.slider-item');
-            if (proofsFirstSlide) {
-                proofsSlideWidth = proofsFirstSlide.offsetWidth + 16; // 16 = gap
-                proofsIndex = proofsTotalSlides;
-                proofsTrack.classList.add('no-transition');
-                proofsTrack.style.transform = `translateX(-${proofsIndex * proofsSlideWidth}px)`;
-                setTimeout(() => proofsTrack.classList.remove('no-transition'), 50);
-            }
-            
-            // Відгуки
-            const reviewsFirstSlide = reviewsTrack.querySelector('.slider-item');
-            if (reviewsFirstSlide) {
-                reviewsSlideWidth = reviewsFirstSlide.offsetWidth + 16;
-                reviewsIndex = reviewsTotalSlides;
-                reviewsTrack.classList.add('no-transition');
-                reviewsTrack.style.transform = `translateX(-${reviewsIndex * reviewsSlideWidth}px)`;
-                setTimeout(() => reviewsTrack.classList.remove('no-transition'), 50);
-            }
-        }
-        
-        function slideProofs(direction) {
-            proofsIndex += direction;
-            proofsTrack.style.transform = `translateX(-${proofsIndex * proofsSlideWidth}px)`;
-            
-            // Перевіряємо чи потрібно "перестрибнути"
-            setTimeout(() => {
-                if (proofsIndex >= proofsTotalSlides * 2) {
-                    proofsTrack.classList.add('no-transition');
-                    proofsIndex = proofsTotalSlides;
-                    proofsTrack.style.transform = `translateX(-${proofsIndex * proofsSlideWidth}px)`;
-                    setTimeout(() => proofsTrack.classList.remove('no-transition'), 50);
-                } else if (proofsIndex < proofsTotalSlides) {
-                    proofsTrack.classList.add('no-transition');
-                    proofsIndex = proofsTotalSlides * 2 - 1;
-                    proofsTrack.style.transform = `translateX(-${proofsIndex * proofsSlideWidth}px)`;
-                    setTimeout(() => proofsTrack.classList.remove('no-transition'), 50);
-                }
-            }, 400);
-        }
-        
-        function slideReviews(direction) {
-            reviewsIndex += direction;
-            reviewsTrack.style.transform = `translateX(-${reviewsIndex * reviewsSlideWidth}px)`;
-            
-            setTimeout(() => {
-                if (reviewsIndex >= reviewsTotalSlides * 2) {
-                    reviewsTrack.classList.add('no-transition');
-                    reviewsIndex = reviewsTotalSlides;
-                    reviewsTrack.style.transform = `translateX(-${reviewsIndex * reviewsSlideWidth}px)`;
-                    setTimeout(() => reviewsTrack.classList.remove('no-transition'), 50);
-                } else if (reviewsIndex < reviewsTotalSlides) {
-                    reviewsTrack.classList.add('no-transition');
-                    reviewsIndex = reviewsTotalSlides * 2 - 1;
-                    reviewsTrack.style.transform = `translateX(-${reviewsIndex * reviewsSlideWidth}px)`;
-                    setTimeout(() => reviewsTrack.classList.remove('no-transition'), 50);
-                }
-            }, 400);
-        }
-        
-        // Підтримка свайпів на мобільних
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        document.getElementById('proofs-slider').addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-        
-        document.getElementById('proofs-slider').addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) slideProofs(1);
-            if (touchEndX - touchStartX > 50) slideProofs(-1);
-        }, {passive: true});
-        
-        document.getElementById('reviews-slider').addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-        
-        document.getElementById('reviews-slider').addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) slideReviews(1);
-            if (touchEndX - touchStartX > 50) slideReviews(-1);
-        }, {passive: true});
-
-        // ПРАВКА: Таймер на 10 хвилин
-        function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                display.textContent = minutes + ":" + seconds;
-                if (--timer < 0) timer = 0;
-            }, 1000);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            startTimer(10 * 60, document.querySelector('#countdown'));
-            initSliders();
-
-            const input = document.querySelector("#phone");
-            const iti = window.intlTelInput(input, {
-                initialCountry: "auto",
-                excludeCountries: ["ru", "by"],
-                preferredCountries: ["ua", "pl", "de"],
-                geoIpLookup: callback => {
-                    fetch("https://ipapi.co/json").then(res => res.json()).then(data => callback(data.country_code)).catch(() => callback("ua"));
-                },
-                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-                separateDialCode: true, 
-            });
-
-            window.handleOrderSubmit = function(e) {
-                e.preventDefault();
-                const nameInput = document.getElementById('user_name');
-                const telegramInput = document.getElementById('user_telegram');
-                const phoneInput = document.getElementById('phone');
-                const btn = e.target.querySelector('button[type="submit"]');
-
-                if (!iti.isValidNumber()) {
-                    phoneInput.classList.add('input-error');
-                    return;
-                }
-
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Обробка...';
-
-                document.getElementById('full_phone').value = iti.getNumber();
-                
-                // Зберігаємо телефон для сторінки thanks.html
-                localStorage.setItem('user_phone', iti.getNumber());
-                
-                const formData = new FormData(document.getElementById('order-form'));
-                
-                // Додаємо UTM параметри
-                formData.append('campaign_name', utmParams.campaign_name);
-                formData.append('adset_name', utmParams.adset_name);
-                formData.append('ad_name', utmParams.ad_name);
-                formData.append('traff_eu', utmParams.traff_eu);
-                
-                // Додаємо суму і return_url для API
-                formData.append('amount', AMOUNT);
-                formData.append('return_url', RETURN_URL);
-                
-                // Meta Pixel: трекаємо відправку форми
-                if (typeof fbq !== 'undefined') {
-                    fbq('track', 'Lead');
-                }
-                
-                // Відправляємо в скрипт і отримуємо дані для оплати
-                console.log('Відправляю запит на:', GOOGLE_SCRIPT_URL);
-                
-                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData })
-                .then(response => {
-                    console.log('Отримано відповідь:', response);
-                    console.log('Status:', response.status);
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Дані від скрипта:', data);
-                    if (data.paymentData) {
-                        console.log('paymentData знайдено, створюю форму...');
-                        // Створюємо приховану форму для POST на WayForPay
-                        const form = document.createElement('form');
-                        form.method = 'POST';
-                        form.action = 'https://secure.wayforpay.com/pay';
-                        form.target = '_top';
-                        form.style.display = 'none';
-                        
-                        const pd = data.paymentData;
-                        console.log('pd:', pd);
-                        const fields = {
-                            'merchantAccount': pd.merchantAccount,
-                            'merchantDomainName': pd.merchantDomainName,
-                            'orderReference': pd.orderReference,
-                            'orderDate': pd.orderDate,
-                            'amount': pd.amount,
-                            'currency': pd.currency,
-                            'productName[]': pd.productName,
-                            'productCount[]': pd.productCount,
-                            'productPrice[]': pd.productPrice,
-                            'merchantSignature': pd.merchantSignature,
-                            'returnUrl': pd.returnUrl,
-                            'returnMethod': 'GET',
-                            'serviceUrl': pd.serviceUrl,
-                            'clientFirstName': pd.clientFirstName,
-                            'clientPhone': pd.clientPhone
-                        };
-                        
-                        console.log('fields:', fields);
-                        
-                        for (const [key, value] of Object.entries(fields)) {
-                            const input = document.createElement('input');
-                            input.type = 'hidden';
-                            input.name = key;
-                            input.value = value;
-                            form.appendChild(input);
-                        }
-                        
-                        console.log('Форма створена, відправляю...');
-                        document.body.appendChild(form);
-                        form.submit();
-                        console.log('Форма відправлена');
-                    } else {
-                        alert('Помилка створення платежу: ' + JSON.stringify(data));
-                        btn.disabled = false;
-                        btn.innerHTML = 'Перейти до оплати';
-                    }
-                })
-                .catch(error => {
-                    console.error('ПОМИЛКА fetch:', error);
-                    console.error('Тип помилки:', error.name);
-                    console.error('Повідомлення:', error.message);
-                    alert('Помилка з\'єднання: ' + error.message);
-                    btn.disabled = false;
-                    btn.innerHTML = 'Перейти до оплати';
-                });
-            };
-        });
-    </script>
+            <p class="text-gray-500 text-sm">
+                &copy; 2024 Всі права захищені.<br>
+                Політика конфіденційності
+            </p>
+        </div>
+    </footer>
 
 </body>
 </html>
