@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Система Контенту 206</title>
+    <title>Система Контенту 2026</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -404,6 +404,11 @@
                 ...utms
             };
 
+            // Відправляємо Lead ПЕРЕД fetch
+            if(typeof fbq !== 'undefined') {
+                fbq('track', 'Lead');
+            }
+
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -411,8 +416,10 @@
                 body: JSON.stringify(formData)
             })
             .then(() => {
-                if(typeof fbq !== 'undefined') fbq('track', 'Lead'); 
-                window.location.href = BOT_REDIRECT_URL; 
+                // Затримка щоб піксель встиг відправитись
+                setTimeout(() => {
+                    window.location.href = BOT_REDIRECT_URL;
+                }, 500);
             })
             .catch(err => {
                 console.error(err);
