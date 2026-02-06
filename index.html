@@ -104,14 +104,12 @@
         </div>
     </header>
 
-    <!-- 1. HERO BLOCK (NEW BACKGROUND: fon.jpg) -->
+    <!-- 1. HERO BLOCK -->
     <section class="relative pt-12 pb-20 md:pt-32 md:pb-32 overflow-hidden">
         
-        <!-- 🔥 BACKGROUND IMAGE (fon.jpg) + Overlay -->
+        <!-- Background Image + Overlay -->
         <div class="absolute inset-0 z-0">
-            <!-- Картинка фона -->
             <img src="fon.jpg" alt="Background" class="w-full h-full object-cover object-center" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'">
-            <!-- Белый слой (85% непрозрачности) чтобы текст читался -->
             <div class="absolute inset-0 bg-white/85 backdrop-blur-[2px]"></div>
         </div>
         
@@ -128,12 +126,14 @@
                         Як за 7 днів вийти зі стану виснаження і повернути собі <span class="gradient-text">внутрішню силу та спокій?</span>
                     </h1>
                     
-                    <!-- Mobile Photo -->
-                    <div class="block md:hidden mb-8 relative">
-                         <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white">
-                            <img src="fonna1slaid.jpg" alt="Фокус Кохання" class="w-full h-auto object-cover" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'">
-                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6 pt-12">
-                                <p class="text-white font-cursive text-2xl opacity-90 text-right">Focus of Love</p>
+                    <!-- 🔥 MOBILE PHOTO (Improved Visibility) -->
+                    <div class="block md:hidden mb-8 relative px-4">
+                         <!-- Добавлен border-gray-100 вместо белого и цветная тень -->
+                         <div class="relative rounded-[2.5rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(230,0,115,0.3)] border border-gray-100">
+                            <!-- Добавлены фильтры насыщенности и контраста -->
+                            <img src="fonna1slaid.jpg" alt="Фокус Кохання" class="w-full h-auto object-cover saturate-[1.1] contrast-[1.05]" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-6 pt-12">
+                                <p class="text-white font-cursive text-2xl opacity-90 text-right drop-shadow-md">Focus of Love</p>
                             </div>
                          </div>
                     </div>
@@ -166,7 +166,7 @@
                 <!-- Desktop Photo -->
                 <div class="hidden md:block w-full md:w-1/2 relative animate-fade-in-up" style="animation-delay: 0.2s;">
                     <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
-                        <img src="fonna1slaid.jpg" alt="Фокус Кохання" class="w-full h-auto object-cover" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'">
+                        <img src="fonna1slaid.jpg" alt="Фокус Кохання" class="w-full h-auto object-cover saturate-[1.1] contrast-[1.05]" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'">
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-8 pt-20">
                             <p class="text-white font-cursive text-3xl opacity-90 text-right">Focus of Love</p>
                         </div>
