@@ -104,10 +104,16 @@
         </div>
     </header>
 
-    <!-- 1. HERO BLOCK -->
-    <section class="relative pt-12 pb-20 md:pt-32 md:pb-32 overflow-hidden bg-gradient-to-b from-white via-brand-lightpink/30 to-white">
-        <!-- Decor -->
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-lightpink rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+    <!-- 1. HERO BLOCK (NEW BACKGROUND: fon.jpg) -->
+    <section class="relative pt-12 pb-20 md:pt-32 md:pb-32 overflow-hidden">
+        
+        <!-- 🔥 BACKGROUND IMAGE (fon.jpg) + Overlay -->
+        <div class="absolute inset-0 z-0">
+            <!-- Картинка фона -->
+            <img src="fon.jpg" alt="Background" class="w-full h-full object-cover object-center" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop'">
+            <!-- Белый слой (85% непрозрачности) чтобы текст читался -->
+            <div class="absolute inset-0 bg-white/85 backdrop-blur-[2px]"></div>
+        </div>
         
         <div class="container mx-auto px-4 relative z-10">
             <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-20">
@@ -219,7 +225,7 @@
         </div>
     </section>
 
-    <!-- 3. ABOUT AUTHOR (Updated Structure) -->
+    <!-- 3. ABOUT AUTHOR -->
     <section class="py-24 bg-gradient-to-b from-brand-lightpink/30 to-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 text-gray-900">Про автора</h2>
@@ -230,14 +236,14 @@
                 
                 <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
                     
-                    <!-- FOTO BEFORE (Mobile: 1st, Desktop: Left) -->
+                    <!-- FOTO BEFORE -->
                     <div class="w-64 h-64 md:w-72 md:h-72 shrink-0 relative order-1 lg:order-1">
                         <div class="absolute inset-0 bg-gray-400 rounded-full blur-xl opacity-20 transform translate-y-4"></div>
                         <img src="do1.jpg" alt="Ilona Before" class="w-full h-full object-cover rounded-full border-8 border-white shadow-xl relative z-10 grayscale hover:grayscale-0 transition-all duration-500" onerror="this.src='https://placehold.co/400x400?text=Before'">
                         <div class="absolute bottom-4 right-0 bg-gray-800 text-white text-xs px-3 py-1 rounded-full z-20">До</div>
                     </div>
 
-                    <!-- TEXT (Mobile: 2nd, Desktop: Center) -->
+                    <!-- TEXT -->
                     <div class="text-center lg:text-left flex-1 order-2 lg:order-2">
                         <h3 class="text-3xl font-bold mb-6">Привіт, я Ілона…</h3>
                         <div class="text-lg text-gray-600 space-y-4 leading-relaxed font-medium">
@@ -256,7 +262,7 @@
                         </div>
                     </div>
 
-                    <!-- FOTO AFTER (Mobile: 3rd, Desktop: Right) -->
+                    <!-- FOTO AFTER -->
                     <div class="w-64 h-64 md:w-72 md:h-72 shrink-0 relative order-3 lg:order-3">
                         <div class="absolute inset-0 bg-brand-accent rounded-full blur-xl opacity-20 transform translate-y-4"></div>
                         <img src="fotoavtora.jpg" alt="Ilona After" class="w-full h-full object-cover rounded-full border-8 border-white shadow-2xl relative z-10" onerror="this.src='https://placehold.co/400x400?text=After'">
@@ -384,118 +390,70 @@
         </div>
     </section>
 
-    <!-- 5. HOW IT WORKS (NEW BLOCK) -->
+    <!-- 5. HOW IT WORKS -->
     <section class="py-24 bg-brand-bg">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 uppercase">ЯК БУДЕ ПРОХОДИТИ НАВЧАННЯ?</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Step 1 -->
                 <div class="bg-white p-8 rounded-2xl shadow-sm relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
                     <div class="text-6xl font-black text-brand-lightpink absolute -top-4 -right-4 select-none group-hover:text-brand-accent/10 transition-colors">01</div>
                     <div class="relative z-10">
-                        <div class="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent font-bold mb-4">
-                            <i class="fa-solid fa-laptop"></i>
-                        </div>
-                        <p class="font-medium text-gray-800">
-                            Після оплати учасникам надається доступ до нашої навчальної платформи, де будуть видаватися послідовні уроки.
-                        </p>
+                        <div class="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent font-bold mb-4"><i class="fa-solid fa-laptop"></i></div>
+                        <p class="font-medium text-gray-800">Після оплати учасникам надається доступ до нашої навчальної платформи, де будуть видаватися послідовні уроки.</p>
                     </div>
                 </div>
-
-                <!-- Step 2 -->
                 <div class="bg-white p-8 rounded-2xl shadow-sm relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
                     <div class="text-6xl font-black text-brand-lightpink absolute -top-4 -right-4 select-none group-hover:text-brand-accent/10 transition-colors">02</div>
                     <div class="relative z-10">
-                        <div class="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent font-bold mb-4">
-                            <i class="fa-solid fa-clock"></i>
-                        </div>
-                        <p class="font-medium text-gray-800">
-                            Курс можна проходити в будь-який зручний час. Рекомендуємо проходити по одному уроку щодня.
-                        </p>
+                        <div class="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent font-bold mb-4"><i class="fa-solid fa-clock"></i></div>
+                        <p class="font-medium text-gray-800">Курс можна проходити в будь-який зручний час. Рекомендуємо проходити по одному уроку щодня.</p>
                     </div>
                 </div>
-
-                <!-- Step 3 -->
                 <div class="bg-white p-8 rounded-2xl shadow-sm relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
                     <div class="text-6xl font-black text-brand-lightpink absolute -top-4 -right-4 select-none group-hover:text-brand-accent/10 transition-colors">03</div>
                     <div class="relative z-10">
-                        <div class="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent font-bold mb-4">
-                            <i class="fa-solid fa-calendar-days"></i>
-                        </div>
-                        <p class="font-medium text-gray-800">
-                            Онлайн-курс триватиме 7 днів і починається відразу після оплати.
-                        </p>
+                        <div class="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent font-bold mb-4"><i class="fa-solid fa-calendar-days"></i></div>
+                        <p class="font-medium text-gray-800">Онлайн-курс триватиме 7 днів і починається відразу після оплати.</p>
                     </div>
                 </div>
-
-                <!-- Step 4 -->
                 <div class="bg-white p-8 rounded-2xl shadow-sm relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
                     <div class="text-6xl font-black text-brand-lightpink absolute -top-4 -right-4 select-none group-hover:text-brand-accent/10 transition-colors">04</div>
                     <div class="relative z-10">
-                        <div class="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent font-bold mb-4">
-                            <i class="fa-brands fa-telegram"></i>
-                        </div>
-                        <p class="font-medium text-gray-800">
-                            Ви отримуєте доступ до закритої телеграм-групи для питань. Доступ до матеріалів — 1 місяць.
-                        </p>
+                        <div class="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent font-bold mb-4"><i class="fa-brands fa-telegram"></i></div>
+                        <p class="font-medium text-gray-800">Ви отримуєте доступ до закритої телеграм-групи для питань. Доступ до матеріалів — 1 місяць.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 6. RESULTS (Moved here) -->
+    <!-- 6. RESULTS -->
     <section class="py-24 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 uppercase">
                 Що ти отримаєш, <span class="gradient-text">пройшовши курс?</span>
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Item 1 -->
                 <div class="bg-brand-bg p-8 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col">
-                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0">
-                        <i class="fa-solid fa-check text-xl"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium leading-relaxed">
-                        Ти зможеш зрозуміти, чому в твоєму житті повторюються певні сценарії — і як вийти з них без болю та боротьби.
-                    </p>
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0"><i class="fa-solid fa-check text-xl"></i></div>
+                    <p class="text-gray-700 font-medium leading-relaxed">Ти зможеш зрозуміти, чому в твоєму житті повторюються певні сценарії — і як вийти з них без болю та боротьби.</p>
                 </div>
-                <!-- Item 2 -->
                 <div class="bg-brand-bg p-8 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col">
-                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0">
-                        <i class="fa-solid fa-check text-xl"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium leading-relaxed">
-                        Навчишся будувати відносини, в яких ти не розчиняєшся в чоловікові, а залишаєшся собою поряд з ним.
-                    </p>
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0"><i class="fa-solid fa-check text-xl"></i></div>
+                    <p class="text-gray-700 font-medium leading-relaxed">Навчишся будувати відносини, в яких ти не розчиняєшся в чоловікові, а залишаєшся собою поряд з ним.</p>
                 </div>
-                <!-- Item 3 -->
                 <div class="bg-brand-bg p-8 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col">
-                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0">
-                        <i class="fa-solid fa-check text-xl"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium leading-relaxed">
-                        Повернеш собі контакт із тілом, чуттєвістю, природною жіночою енергією — без напруги, без масок, без штучності.
-                    </p>
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0"><i class="fa-solid fa-check text-xl"></i></div>
+                    <p class="text-gray-700 font-medium leading-relaxed">Повернеш собі контакт із тілом, чуттєвістю, природною жіночою енергією — без напруги, без масок, без штучності.</p>
                 </div>
-                <!-- Item 4 -->
                 <div class="bg-brand-bg p-8 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col">
-                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0">
-                        <i class="fa-solid fa-check text-xl"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium leading-relaxed">
-                        Навчишся розпізнавати справжні наміри чоловіків і відрізняти любов від залежності, маніпуляції та звички.
-                    </p>
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0"><i class="fa-solid fa-check text-xl"></i></div>
+                    <p class="text-gray-700 font-medium leading-relaxed">Навчишся розпізнавати справжні наміри чоловіків і відрізняти любов від залежності, маніпуляції та звички.</p>
                 </div>
-                <!-- Item 5 -->
                 <div class="bg-brand-bg p-8 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col md:col-span-2 lg:col-span-1">
-                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0">
-                        <i class="fa-solid fa-check text-xl"></i>
-                    </div>
-                    <p class="text-gray-700 font-medium leading-relaxed">
-                        Навчишся ставити межі не через конфлікт, а через внутрішню цілісність і повагу до себе.
-                    </p>
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-500 mb-4 shrink-0"><i class="fa-solid fa-check text-xl"></i></div>
+                    <p class="text-gray-700 font-medium leading-relaxed">Навчишся ставити межі не через конфлікт, а через внутрішню цілісність і повагу до себе.</p>
                 </div>
             </div>
         </div>
@@ -523,22 +481,21 @@
         </div>
     </section>
 
-    <!-- 8. MONEY BACK GUARANTEE (NEW BLOCK) -->
+    <!-- 8. MONEY BACK GUARANTEE -->
     <section class="py-24 bg-white">
         <div class="container mx-auto px-4 max-w-4xl">
             <div class="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-[2.5rem] p-8 md:p-12 shadow-xl text-center relative overflow-hidden">
-                <!-- Badge -->
                 <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-500 text-3xl mx-auto mb-6 shadow-inner">
                     <i class="fa-solid fa-shield-halved"></i>
                 </div>
                 
-                <h3 class="text-2xl md:text-3xl font-bold mb-6">ГАРАНТІЯ ПОВЕРНЕННЯ</h3>
+                <h3 class="text-2xl md:text-3xl font-bold mb-6 uppercase">ГАРАНТІЯ ПОВЕРНЕННЯ</h3>
                 
                 <p class="text-lg text-gray-700 leading-relaxed mb-8">
                     Я впевнена на 100% в ефективності свого курсу, що готова зробити пропозицію, від якої неможливо відмовитися. Пройди мій курс. Поринь в кожну лекцію, практику і вправу. І якщо через 7 днів ти не відчуєш жодних змін у своєму житті, я поверну тобі кожну копійку. Без жодних запитань. Тож сміливо приєднуйся до мого курсу, бо ти нічого не втрачаєш, а тільки отримуєш!
                 </p>
 
-                <button onclick="openModal()" class="gradient-bg text-white text-lg font-bold px-12 py-4 rounded-full premium-shadow hover:scale-105 transition-all duration-300">
+                <button onclick="openModal()" class="gradient-bg text-white text-lg font-bold px-12 py-4 rounded-full premium-shadow hover:scale-105 transition-all duration-300 uppercase">
                     ОТРИМАТИ КУРС
                 </button>
             </div>
@@ -575,7 +532,7 @@
         </div>
     </section>
 
-    <!-- 10. FINAL CTA (UPDATED) -->
+    <!-- 10. FINAL CTA -->
     <section class="py-24 bg-white relative overflow-hidden">
         <div class="absolute inset-0 bg-brand-accent/5 z-0"></div>
         <div class="container mx-auto px-4 relative z-10 text-center max-w-4xl">
