@@ -170,9 +170,14 @@
     </div>
     
     <script>
-        // Отримуємо orderReference з URL (WayForPay додає його при поверненні)
+        // Отримуємо orderReference з URL або localStorage
         const urlParams = new URLSearchParams(window.location.search);
-        const orderReference = urlParams.get('orderReference');
+        let orderReference = urlParams.get('orderReference');
+        
+        // Якщо немає в URL - беремо з localStorage
+        if (!orderReference) {
+            orderReference = localStorage.getItem('pending_order_id');
+        }
         
         // Налаштування
         const SUPABASE_URL = 'https://jlwjocmcmrplvulqxnik.supabase.co';
@@ -192,6 +197,7 @@
                 );
                 
                 const data = await response.json();
+                console.log('Token data:', data);
                 
                 if (data && data.length > 0 && data[0].status === 'unused') {
                     return data[0].token;
@@ -209,21 +215,27 @@
             const fallbackContainer = document.getElementById('fallback-container');
             const botLink = document.getElementById('bot-link');
             
+            console.log('OrderReference:', orderReference);
+            
             if (orderReference) {
                 // Чекаємо трохи, поки webhook створить токен
                 let token = null;
                 let attempts = 0;
-                const maxAttempts = 10;
+                const maxAttempts = 15;
                 
                 while (!token && attempts < maxAttempts) {
-                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    await new Promise(resolve => setTimeout(resolve, 2000));
                     token = await getTokenByOrderId(orderReference);
                     attempts++;
+                    console.log('Attempt', attempts, 'token:', token);
                 }
                 
                 loadingState.classList.add('hidden');
                 
                 if (token) {
+                    // Очищаємо localStorage
+                    localStorage.removeItem('pending_order_id');
+                    
                     const link = `https://t.me/${BOT_USERNAME}?start=${token}`;
                     botLink.href = link;
                     botLinkContainer.classList.remove('hidden');
