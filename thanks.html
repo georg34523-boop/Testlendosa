@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дякую за оплату! | Svitlana Tape</title>
+    <title>Дякуємо за оплату! | Svitlana Tape</title>
     
     <!-- Meta Pixel Code -->
     <script>
@@ -16,9 +15,9 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1548773689373078'); // <-- ЗАМІНИ YOUR_PIXEL_ID_HERE на свій ID
+    fbq('init', '1548773689373078');
     fbq('track', 'PageView');
-    fbq('track', 'Purchase', {currency: "UAH", value: 0}); // Подія покупки
+    fbq('track', 'Purchase', {currency: 'UAH', value: 390});
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1548773689373078&ev=PageView&noscript=1"/></noscript>
@@ -30,127 +29,217 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+    
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #0b0d12;
+            background: linear-gradient(135deg, #0b0d12 0%, #1a1d26 100%);
             color: #ffffff;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         .success-card {
             background: linear-gradient(145deg, #13161c 0%, #0f1116 100%);
             border: 1px solid #2d323e;
-        }
-        
-        .brand-color {
-            color: #E13030;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
         
         .success-icon {
-            background: linear-gradient(145deg, #1a5d1a 0%, #0f3d0f 100%);
-            border: 3px solid #22c55e;
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            animation: pulse-green 2s infinite;
         }
         
-        .tg-btn {
-            background: linear-gradient(145deg, #0088cc 0%, #006699 100%);
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+        }
+        
+        .telegram-btn {
+            background: linear-gradient(135deg, #0088cc 0%, #0077b5 100%);
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.3);
+            animation: pulse-blue 2s infinite;
         }
-        .tg-btn:hover {
+        
+        .telegram-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 136, 204, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 136, 204, 0.4);
         }
         
-        .pulse-ring {
-            animation: pulse-ring 2s infinite;
+        @keyframes pulse-blue {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0, 136, 204, 0.3); }
+            50% { box-shadow: 0 10px 40px rgba(0, 136, 204, 0.5); }
         }
         
-        @keyframes pulse-ring {
-            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
-            70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        .step-number {
+            background: linear-gradient(135deg, #E13030 0%, #b91c1c 100%);
         }
         
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
+        .loading-spinner {
+            border: 3px solid #2d323e;
+            border-top: 3px solid #0088cc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: { DEFAULT: '#E13030', hover: '#b91c1c' },
-                        dark: { bg: '#0b0d12', card: '#13161c', border: '#2d323e' }
-                    }
-                }
-            }
-        }
-    </script>
 </head>
-<body class="p-4">
-
-    <div class="success-card rounded-3xl p-8 md:p-12 max-w-lg w-full text-center fade-in">
+<body class="flex items-center justify-center p-4">
+    
+    <div class="success-card rounded-3xl p-8 md:p-12 max-w-lg w-full text-center">
         
         <!-- Success Icon -->
-        <div class="success-icon pulse-ring w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8">
-            <i class="fa-solid fa-check text-5xl text-green-400"></i>
+        <div class="success-icon w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa-solid fa-check text-white text-3xl md:text-4xl"></i>
         </div>
         
-        <!-- Heading -->
-        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-4 uppercase">
-            Дякую за оплату!
+        <!-- Title -->
+        <h1 class="text-2xl md:text-3xl font-bold mb-4">
+            Оплата пройшла успішно! 🎉
         </h1>
         
-        <!-- Message -->
-        <div class="space-y-4 mb-8">
-            <p class="text-gray-300 text-lg">
-                Ваше замовлення успішно оформлено <i class="fa-solid fa-heart text-brand"></i>
-            </p>
-            <div class="bg-dark-bg/50 rounded-xl p-4 border border-dark-border">
-                <p class="text-gray-400">
-                    <strong class="text-white">Світлана</strong> зв'яжеться з вами найближчим часом для проведення діагностики.
-                </p>
-            </div>
+        <p class="text-gray-400 mb-8">
+            Дякуємо за довіру! Тепер перейдіть у Telegram-бот, щоб розпочати діагностику.
+        </p>
+        
+        <!-- Loading state -->
+        <div id="loading-state" class="mb-8">
+            <div class="loading-spinner mx-auto mb-4"></div>
+            <p class="text-gray-400 text-sm">Генеруємо ваше посилання...</p>
         </div>
         
-        <!-- Divider -->
-        <div class="flex items-center gap-4 mb-8">
-            <div class="h-px bg-dark-border flex-1"></div>
-            <span class="text-gray-500 text-sm uppercase tracking-widest">А поки що</span>
-            <div class="h-px bg-dark-border flex-1"></div>
-        </div>
-        
-        <!-- Telegram CTA -->
-        <div class="space-y-4">
-            <p class="text-gray-300">
-                Заходьте в <strong class="text-white">Telegram-канал Світлани</strong> — там багато корисної інформації для вас!
-            </p>
-            
-            <a href="https://t.me/+myyXteo6viUxMThi" target="_blank" class="tg-btn inline-flex items-center justify-center gap-3 text-white text-lg font-bold py-4 px-8 rounded-xl uppercase tracking-wide w-full">
+        <!-- Bot Link (hidden initially) -->
+        <div id="bot-link-container" class="hidden mb-8">
+            <a id="bot-link" href="#" target="_blank" 
+               class="telegram-btn inline-flex items-center justify-center gap-3 text-white text-lg font-bold py-4 px-8 rounded-full w-full">
                 <i class="fa-brands fa-telegram text-2xl"></i>
-                Перейти в Telegram
+                Перейти в Telegram-бот
             </a>
         </div>
         
-        <!-- Footer note -->
-        <p class="text-gray-600 text-xs mt-8">
-            Якщо у вас виникли питання — напишіть нам у Telegram
+        <!-- Fallback link -->
+        <div id="fallback-container" class="hidden mb-8">
+            <p class="text-yellow-400 mb-4">
+                <i class="fa-solid fa-exclamation-triangle mr-2"></i>
+                Якщо посилання не з'явилося, напишіть нам:
+            </p>
+            <a href="https://t.me/testlid12bot" target="_blank" 
+               class="telegram-btn inline-flex items-center justify-center gap-3 text-white text-lg font-bold py-4 px-8 rounded-full w-full">
+                <i class="fa-brands fa-telegram text-2xl"></i>
+                Написати в бот
+            </a>
+        </div>
+        
+        <!-- Steps -->
+        <div class="text-left space-y-4 mb-8">
+            <h3 class="text-lg font-bold text-center mb-4">Що далі?</h3>
+            
+            <div class="flex items-start gap-4">
+                <div class="step-number w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+                <div>
+                    <p class="text-gray-300">Натисніть кнопку вище і перейдіть у Telegram-бот</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+                <div class="step-number w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+                <div>
+                    <p class="text-gray-300">Натисніть "Старт" у боті — ваш доступ активується автоматично</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+                <div class="step-number w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+                <div>
+                    <p class="text-gray-300">Надішліть фото для діагностики та отримайте персональні рекомендації!</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Support -->
+        <p class="text-gray-500 text-sm">
+            Виникли питання? Напишіть нам у 
+            <a href="https://t.me/testlid12bot" class="text-blue-400 hover:underline">Telegram</a>
         </p>
         
     </div>
-
+    
+    <script>
+        // Отримуємо orderReference з URL (WayForPay додає його при поверненні)
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderReference = urlParams.get('orderReference');
+        
+        // Налаштування
+        const SUPABASE_URL = 'https://jlwjocmcmrplvulqxnik.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impsd2pvY21jbXJwbHZ1bHF4bmlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyODY5NjgsImV4cCI6MjA4NTg2Mjk2OH0.5jbJRQVUJ2Hcle3bhq3LOtAtRpaHAd5_Slh44_h9apM';
+        const BOT_USERNAME = 'testlid12bot';
+        
+        async function getTokenByOrderId(orderId) {
+            try {
+                const response = await fetch(
+                    `${SUPABASE_URL}/rest/v1/payment_tokens?order_id=eq.${orderId}&select=token,status`,
+                    {
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                        }
+                    }
+                );
+                
+                const data = await response.json();
+                
+                if (data && data.length > 0 && data[0].status === 'unused') {
+                    return data[0].token;
+                }
+                return null;
+            } catch (error) {
+                console.error('Error fetching token:', error);
+                return null;
+            }
+        }
+        
+        async function init() {
+            const loadingState = document.getElementById('loading-state');
+            const botLinkContainer = document.getElementById('bot-link-container');
+            const fallbackContainer = document.getElementById('fallback-container');
+            const botLink = document.getElementById('bot-link');
+            
+            if (orderReference) {
+                // Чекаємо трохи, поки webhook створить токен
+                let token = null;
+                let attempts = 0;
+                const maxAttempts = 10;
+                
+                while (!token && attempts < maxAttempts) {
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    token = await getTokenByOrderId(orderReference);
+                    attempts++;
+                }
+                
+                loadingState.classList.add('hidden');
+                
+                if (token) {
+                    const link = `https://t.me/${BOT_USERNAME}?start=${token}`;
+                    botLink.href = link;
+                    botLinkContainer.classList.remove('hidden');
+                } else {
+                    fallbackContainer.classList.remove('hidden');
+                }
+            } else {
+                // Немає orderReference - показуємо fallback
+                loadingState.classList.add('hidden');
+                fallbackContainer.classList.remove('hidden');
+            }
+        }
+        
+        // Запускаємо
+        init();
+    </script>
+    
 </body>
 </html>
